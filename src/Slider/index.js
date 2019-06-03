@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import LeftArrow from './arrows/left-arrow';
 import RightArrow from './arrows/right-arrow';
@@ -6,93 +6,116 @@ import Dots from './dots';
 
 import * as s from './style.js';
 
+const initialState = {
+  index:0,
+  translateValue: 0,
+  translateDrag: 0,
+  translateDutation: 0.5,
+  x0: null,
+};
+
 /** Image slider */
-class Slider extends Component {
+const Slider = (props) => {
+  const {
+    cover=true,
+    invert=false,
+    loop=!props.swipe,
+    arrowHover=false,
+    swipe=false,
+    transition=true,
+    callback,
+    containerStyle,
+    slideStyle,
+    dotStyle,
+    arrowStyle,
+    arrowLeftImg,
+    arrowRightImg,
+    autoPlay,
+    duration=5000,
+    images = []
+  } = props;
+
+  // const slider = useRef();
   /**
    * Initial state.
    * @param { number } index - of the current slide.
    * @param { number(px) } translateValue - px to transalte the image.
    */
-  state = {
-    index:0,
-    translateValue: 0,
-    translateDrag: 0,
-    translateDutation: 0.5,
-    x0: null,
-  };
+  const [state, setState] = useState(initialState);
+  const [listeners, setListeners] = useState(false);
+  const slider = useRef();
 
-  componentDidMount () {
-    const { autoPlay, duration=5000 } = this.props
-    autoPlay && (setInterval(this.goToNextSlide, duration));
-  }
-
-  componentDidUpdate () {
-    if (this.Slider) {
-      this.Slider.addEventListener('mousedown', this.lock, false);
-      this.Slider.addEventListener('touchstart', this.lock, false);
-      this.Slider.addEventListener('mouseup', this.muve, false);
-      this.Slider.addEventListener('touchend', this.muve, false);
-      this.Slider.addEventListener('mousemove', this.drag, false);
-      this.Slider.addEventListener('touchmove', this.drag, false);
-      this.Slider.addEventListener('touchmove', e => {e.preventDefault()}, false)
-      document.addEventListener('touchend', this.reset, false);
-      document.addEventListener('mouseup', this.reset, false);
+  useEffect(() => {
+    const { current } = slider;
+    if (current && !listeners) {
+      const list = [
+        [lock, 'mousedown', 'touchstart'],
+        [muve, 'mouseup', 'touchend'],
+        [drag, 'mousemove', 'touchmove'],]
+      list.forEach(([method, mouseE, touchM]) => {
+        current.addEventListener(touchM, method, false);
+        current.addEventListener(mouseE, method, false);
+      })
+      document.addEventListener('touchend', reset, false);
+      document.addEventListener('mouseup', reset, false);
+      setListeners(true);
     }
-  }
+  })
 
-  reset = e => {
-    this.setState({x0: null, translateDrag: 0})
-  }
+  useEffect(() => {
+    const play = autoPlay && setInterval(goToNextSlide, duration);
+    return play && clearInterval(play)
+  },[])
 
-  muve = (e) => {
-    const { index, x0 } = this.state;
-    if(x0) {
-      let dx = this.unify(e).clientX - x0
-      let s = Math.sign(dx);
-      let f = +(s*dx/this.Slider.offsetWidth).toFixed(2); 
-      if((index > 0 || s < 0) && (index < this.props.images.length - 1 || s > 0) && f > .2)
-        this.setState({
-          index: index - s,
-          translateValue: -(this.getWidth(this.Slider) * (index - s)),
-        }, () => this.props.callback && this.props.callback(index));
-      this.setState({x0: null, translateDrag: 0, translateDutation: 1 - f,})
-    } 
-  }
-
-  lock = (e) => {
-    this.setState({x0: this.unify(e).clientX})
-    this.setState({translateDutation: 0})
-  }
-
-  drag = (e) => {
-    const { x0 } = this.state;
-    e.preventDefault();
-    if(x0 || x0 === 0)  
-      this.setState({
-        translateDrag: Math.round(this.unify(e).clientX - x0),
-      });
+  const reset = e => {
+    setState(state => ({ ...state, x0: null, translateDrag: 0, translateDutation: 0.5}));
   };
 
-  unify = (e) => e.changedTouches ? e.changedTouches[0] : e;
+  const muve = (e) => {
+    setState(state => {
+      if (state.x0) {
+        const dx = unify(e).clientX - state.x0;
+        const s = Math.sign(dx);
+        const f = +(s*dx/slider.current.offsetWidth).toFixed(2);
+        if((state.index > 0 || s < 0) && (state.index < images.length - 1 || s > 0) && f > .2) {
+          goToSlide(state.index - s)
+          return {
+            ...state,
+            x0: null, 
+            translateDrag: 0, 
+            translateDutation: 1 - f,
+          }
+        }
+      } 
+      return {...state, translateDutation: 0.5,};
+    });
+  };
+
+  const lock = (e) => {
+    setState(state => ({...state, x0: unify(e).clientX, translateDutation: 0}));
+  };
+
+  const drag = (e) => {
+    e.preventDefault();
+    setState(state => 
+      state.x0 
+        ? {...state, translateDrag: Math.round(unify(e).clientX - state.x0)}
+        : state);
+  };
+
+  const unify = (e) => e.changedTouches ? e.changedTouches[0] : e;
 
   /**
    * Translate toward the prev slide.
    * Set the state with the index and translateValue.
    * If it's the first slide go to the last.
    */
-  goToPreviousSlide = () => {
-    const { index, translateValue } = this.state;
-    if (index > 0) {
-      this.setState({
-        index: index - 1,
-        translateValue: translateValue + this.getWidth(this.Slider)
-      },() => this.props.callback && this.props.callback(this.state.index));
-    } else if (this.props.loop) {
-      this.setState({
-        index: this.props.images.length - 1,
-        translateValue: -(this.getWidth(this.Slider) * (this.props.images.length - 1))
-      },() => this.props.callback && this.props.callback(this.state.index));
-    }
+  const goToPreviousSlide = () => {
+    const { index } = state;
+    const i = index < images.length - 1 
+    ? index - 1 
+    : loop ? images.length - 1 : index;
+    goToSlide(i);
   }
 
   /**
@@ -100,19 +123,12 @@ class Slider extends Component {
    * Set the state with the index and translateValue.
    * If it's the last slide go to the first.
    */
-  goToNextSlide = () => {
-    const { index, translateValue } = this.state;
-    if (index < this.props.images.length - 1) {
-      this.setState({
-        index: index + 1,
-        translateValue: translateValue - this.getWidth(this.Slider)
-      },() => this.props.callback && this.props.callback(this.state.index));
-    } else if (this.props.loop) {
-      this.setState({
-        index: 0,
-        translateValue: 0
-      },() => this.props.callback && this.props.callback(this.state.index));
-    }
+  const goToNextSlide = () => {
+    const { index } = state;
+    const i = index < images.length - 1 
+      ? index + 1 
+      : loop ? 0 : index;
+    goToSlide(i);
   }
 
   /**
@@ -120,69 +136,51 @@ class Slider extends Component {
    * Set the state with the corrispondent 
    * index to the dot and translateValue.
    */
-  handleDotClick = id => {
-    const { index } = this.state;
-    if (id === index) return;
-    this.setState({
-      index: id,
-      translateValue: -(this.getWidth(this.Slider) * id)
-    },() => this.props.callback && this.props.callback(this.state.index));
+  const handleDotClick = i => {
+    const { index } = state;
+    if (i === index) return;
+    goToSlide(i);
   }
 
-  getWidth = node => node.getBoundingClientRect().width
+  const goToSlide = index => {
+    setState(state => ({ ...state, index }));
+    callback && callback(index)
+  }
 
-  /**
-   * Initial state.
-   * @return { component } single slide component.
-   */
-  renderSlides = (images, cover) => ( 
-    images.map((curr, i) =>{ 
-      return <s.Slide style={this.props.slideStyle} cover={cover} key={i} image={curr} />;}
-    )
-  )
+  const getWidth = ({current}) => current && current.getBoundingClientRect().width
   
   /**
    * Render the entire slide with arrows and dots.
    * @return { component } Container component.
    */
-  render () {
-    const { translateValue, translateDrag, translateDutation, index } = this.state;
-    const {
-      cover=true,
-      invert=false,
-      loop=true,
-      arrowHover=false,
-      swipe=false,
-      transition=true,
-      containerStyle,
-      dotStyle,
-      arrowStyle,
-      arrowLeftImg,
-      arrowRightImg,
-      images = [] } = this.props;
 
-    return (
-      !!images.length && 
-        <s.Container>
-          <s.Gallery cover={cover} style={containerStyle}>
-            <s.Slider translateDutation={translateDutation} transition={transition} translateDrag={translateDrag} translateValue={translateValue} ref={r => this.Slider = r}>
-              {this.renderSlides(images, cover)}
-            </s.Slider>
-          </s.Gallery>
-          <Dots
-            index={index}
-            images={images}
-            dotClick={this.handleDotClick}
-            dotStyle={dotStyle}
-            invert={invert}
-            />
-          {!swipe && <s.Arrows>
-            <LeftArrow arrowStyle={arrowStyle} arrowLeftImg={arrowLeftImg} arrowHover={arrowHover} prevSlide={this.goToPreviousSlide}/>
-            <RightArrow arrowStyle={arrowStyle} arrowRightImg={arrowRightImg} arrowHover={arrowHover} nextSlide={this.goToNextSlide} />
-          </s.Arrows>}
-        </s.Container>
-    );
-  }
+  return (
+    !!images.length && 
+      <s.Container>
+        <s.Gallery cover={cover} style={containerStyle}>
+          <s.Slider id="slider" 
+            translateDutation={state.translateDutation} 
+            sliderWidth={getWidth(slider)} 
+            index={state.index} 
+            transition={transition} 
+            translateDrag={state.translateDrag}
+            ref={slider}>
+            {images.map((curr, i) => <s.Slide style={slideStyle} cover={cover} key={i} image={curr}/>)}
+          </s.Slider>
+        </s.Gallery>
+        <Dots
+          index={state.index}
+          images={images}
+          dotClick={handleDotClick}
+          dotStyle={dotStyle}
+          invert={invert}
+          />
+        {!swipe && <s.Arrows>
+          <LeftArrow arrowStyle={arrowStyle} arrowLeftImg={arrowLeftImg} arrowHover={arrowHover} prevSlide={goToPreviousSlide}/>
+          <RightArrow arrowStyle={arrowStyle} arrowRightImg={arrowRightImg} arrowHover={arrowHover} nextSlide={goToNextSlide} />
+        </s.Arrows>}
+      </s.Container>
+  );
 }
 
 export default Slider;
