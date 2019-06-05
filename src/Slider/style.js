@@ -19,8 +19,8 @@ export const Slider = styled.div`
   z-index: 1;
   transform: translateX(${({ sliderWidth, index, translateDrag }) => `${-(index * sliderWidth) + translateDrag}px`});
   transition:  
-    ${({ transition, translateDutation }) => 
-      transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDutation * .5}s` : 'none'};
+    ${({ transition, translateDuration }) => 
+      transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDuration * .5}s` : 'none'};
 `;
 
 export const Slide = styled.div`
