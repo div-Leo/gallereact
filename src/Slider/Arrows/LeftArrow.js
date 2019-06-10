@@ -3,10 +3,9 @@ import * as s from '../style.js';
 
 import ArrowLeft from '../../assets/ArrowLeft.svg';
 
-
-const LeftArrow = ({ prevSlide, arrowStyle, arrowHover, arrowLeftImg }) => {
+const LeftArrow = ({ goToPreviousSlide, arrowStyle, arrowHover, arrowLeftImg }) => {
   return (
-    <s.ArrowL hover={arrowHover} onClick={prevSlide}>
+    <s.ArrowL hover={arrowHover} onClick={goToPreviousSlide}>
       <img src={arrowLeftImg || ArrowLeft} style={{arrowStyle}} alt="" />
     </s.ArrowL>
   );
