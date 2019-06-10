@@ -34,6 +34,8 @@ const unsplash = new Unsplash({
    * Slider Component.
    * @prop { boolean } autoPlay - Slider auto play - Deafult: false.
    * @prop { number } duration - Duration for every slide - Deafult: 5000.
+   * @prop { number } index - Input index to go to specific index.
+   * @prop { boolean } loop - Slider will re-start from the beginnign - Deafult: true.
    * @prop { boolean } transition - Animated transition on change slide - Deafult: true.
    * @prop { boolean } cover - Image style, if false the applyed style is contain. - Deafult: true(cover).
    * @prop { boolean } invert - Dark or Light style - Deafult: false(light).
@@ -41,28 +43,34 @@ const unsplash = new Unsplash({
    * @prop { boolean } arrowHover - Show on over - Deafult: false(shown).
    * @prop { object } containerStyle - Style to apply on the container.
    * @prop { object } slideStyle - Style to apply on the single slide.
+   * @prop { object } captionStyle - Style to apply on the slide captions.
    * @prop { object } dotStyle - Style to apply on the dots.
    * @prop { object } arrowStyle - Style to apply on the arrows.
+   * @prop { string } primary - Color to apply on the default dot - must be valid color ('black', '#000', rgb(0,0,0)).
+   * @prop { string } secndary - Color to apply on the active dot - must be valid color ('black', '#000', rgb(0,0,0)).
    * @prop { url } arrowLeftImg - Image for the left arrow.
    * @prop { url } arrowRightImg - Image for the right arrow.
    * @prop { func } callback - Callback function on change slide @param { index }.
    * @prop { url[]! } images - Array of images.
+   * @prop { string[]! } captions - Array of captions for each image, if passed shouldn't be null.
    */
 class App extends Component {
-  state = { images: [] }
+  state = { images: [], authors: [], description: [] }
 
   componentDidMount () {
-    this.unsplashPhotos('white')
+    this.unsplashPhotos('sea')
   }
 
   unsplashPhotos = (topic) => {
-    unsplash.search.photos(topic, 10)
+    unsplash.search.photos(topic, 1)
     .then(toJson)
     .then(({results}) => {
       if (results.length) {
         this.setState({
-          images: [...this.state.images, ...results.map(img=> img.urls.regular)]
-        });
+          images: [...this.state.images, ...results.map(img=> img.urls.regular)],
+          authors: [...this.state.authors, ...results.map(img=> img.user.name)],
+          description: [...this.state.description, ...results.map(img=> img.alt_description)],
+        })
       }
     }).catch((err)=>{
       console.error(err);
@@ -70,26 +78,45 @@ class App extends Component {
   }
 
   render() {
-    const { images = [] } = this.state
+    const { images, authors, description } = this.state
     return (
       <>
       <div className="title">GALLEREACT</div>
-      <div className="App">
+      <div className="payoff">Most custom slider ever</div>
+      <div className="Container">
         <Slider 
-          // containerStyle = {{
-          //   width: '100%',
-          // }}
-          // slideStyle = {{
-          //   width: '80%',
-          //   height: '90%',
-          //   margin: '5% 10%',
-          //   boxShadow: '0 2px 20px -1px #2222',
-          // }}
+          containerStyle = {{
+            width: '100%',
+          }}
+          slideStyle = {{
+            width: '80%',
+            height: '90%',
+            margin: '5% 10%',
+            boxShadow: '0 2px 20px -1px #2222',
+            position: 'relative',
+          }}
+          taglineStyle={{
+            background: '#FFF',
+          }}
+          titleStyle={{
+            fontWeight: 800,
+            fontSize: '1.2rem',
+          }}
+          captionStyle={{
+            fontWeight: 500,
+            fontSize: '.8rem',
+          }}
+          dotStyle={{
+            width: '25px',
+            height: '2px',
+            borderRadius: 0,
+            margin: '0px',
+          }}
           images={images}
-          loop={false}
-          // swipe
-          // cover={false}
-        />
+          titles={authors}
+          captions={description}
+          swipe
+        /> 
       </div>
       </>
     );
