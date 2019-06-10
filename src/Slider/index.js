@@ -1,14 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-import LeftArrow from './arrows/left-arrow';
-import RightArrow from './arrows/right-arrow';
-import Dots from './dots';
+import { RightArrow, LeftArrow } from './Arrows';
+import Dots from './Dots';
+import Tagline from './Tagline';
 
 import * as s from './style.js';
 
 const initialState = {
   index:0,
-  translateValue: 0,
   translateDrag: 0,
   translateDuration: 0.5,
   x0: null,
@@ -25,6 +24,13 @@ const Slider = (props) => {
     callback,
     containerStyle,
     slideStyle,
+    taglineStyle,
+    captionStyle,
+    titleStyle,
+    captions = [],
+    titles = [],
+    primary,
+    secondary,
     dotStyle,
     arrowStyle,
     arrowLeftImg,
@@ -59,32 +65,31 @@ const Slider = (props) => {
   };
 
   const muve = e => {
-    e.persist();
+    const { clientX } = unify(e)
     if (state.x0) {
-      const dx = unify(e).clientX - state.x0;
+      const dx = clientX - state.x0;
       const s = Math.sign(dx);
       const f = +(s*dx/getWidth(slider)).toFixed(2);
       if(f > .2) {
         setState(state => ({
-          ...state,
-          x0: null,
-          translateDrag: 0,
-          translateDuration: 1 - f,
+          ...state, x0: null, translateDrag: 0, translateDuration: 1 - f,
         }))
         goToSlide(state.index - s)
       }
-    } else setState(state => ({...state, translateDuration: 0.5, x0: null, translateDrag: 0}));
+    } else setState(state => ({
+      ...state, translateDuration: 0.5, x0: null, translateDrag: 0
+    }));
   };
 
   const lock = (e) => {
-    e.persist();
-    setState(state => ({...state, x0: unify(e).clientX, translateDuration: 0}));
+    const { clientX } = unify(e)
+    setState(state => ({...state, x0: clientX, translateDuration: 0}));
   };
 
   const drag = (e) => {
     if (state.x0) {
-      e.persist();
-      setState(state =>({...state, translateDrag: Math.round(unify(e).clientX - state.x0)}));
+      const { clientX } = unify(e)
+      setState(state =>({...state, translateDrag: Math.round(clientX - state.x0)}));
     }
   };
 
@@ -128,29 +133,33 @@ const Slider = (props) => {
   return (
     <s.Container>
       <s.Gallery cover={cover} style={containerStyle}>
-        <s.Slider id="slider"
+        <s.Slider
           onTouchStart={lock} onTouchMove={drag} onTouchEnd={muve}
           onMouseDown={lock} onMouseMove={drag} onMouseUp={muve}
-          translateDuration={state.translateDuration} 
-          sliderWidth={getWidth(slider)} 
-          index={state.index} 
+          sliderWidth={getWidth(slider)}
           transition={transition}
-          autoPlay={autoPlay}
+          index={state.index}
           translateDrag={state.translateDrag}
+          translateDuration={state.translateDuration}
           ref={slider}>
-          {images.map((curr, i) => <s.Slide style={slideStyle} cover={cover} key={i} image={curr}/>)}
+          {images.map((curr, i) => 
+            <s.Slide 
+              style={slideStyle}
+              cover={cover} 
+              key={i} 
+              image={curr}> 
+              <Tagline {...{i, titles, captions, taglineStyle, titleStyle, captionStyle}} />
+            </s.Slide>
+            )}
         </s.Slider>
       </s.Gallery>
       <Dots
         index={state.index}
-        images={images}
-        dotClick={handleDotClick}
-        dotStyle={dotStyle}
-        invert={invert}
+        {...{images, handleDotClick, dotStyle, invert, primary, secondary,}}
         />
       {!swipe && <s.Arrows>
-        <LeftArrow arrowStyle={arrowStyle} arrowLeftImg={arrowLeftImg} arrowHover={arrowHover} prevSlide={goToPreviousSlide}/>
-        <RightArrow arrowStyle={arrowStyle} arrowRightImg={arrowRightImg} arrowHover={arrowHover} nextSlide={goToNextSlide} />
+        <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide}}/>
+        <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide}}/>
       </s.Arrows>}
     </s.Container>
   );
