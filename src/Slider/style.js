@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const Container = styled.div`
   width: 100%;
@@ -27,10 +27,35 @@ export const Slide = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
+  position: relative;
   background-image: url(${({ image }) => image});
   background-position: center;
   background-repeat: no-repeat;
   background-size: ${({ cover }) => cover ? 'cover' : 'contain'};
+`;
+
+export const Tagline = styled.div`
+  background: #FFFA;
+  color: #333;
+  text-align: center;
+  width: 100.5%;
+  position: absolute;
+  padding: 15px 20px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,0);
+`;
+
+export const Title = styled.div`
+  margin: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const Caption = styled.p`
+  width: 100%;
+  white-space: normal;
 `;
 
 export const Arrows = styled.div`
