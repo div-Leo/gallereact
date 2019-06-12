@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Slider from './Slider'
 import './App.css';
 import Unsplash, { toJson } from 'unsplash-js';
+import Prism from "prismjs";
+import 'prismjs/components/prism-jsx.min';
+import "./lightSyntax.css";
+
 
 const unsplash = new Unsplash({
   applicationId: '856a49ae384c50aca5ecfcd61037378e4fceaa65b1914cc924a4c6cd3faa2ee7',
@@ -32,9 +36,9 @@ const unsplash = new Unsplash({
 
 /**
    * Slider Component.
-   * @prop { boolean } autoPlay - Slider auto play - Deafult: false.
-   * @prop { number } duration - Duration for every slide - Deafult: 5000.
    * @prop { number } index - Input index to go to specific index.
+   * @prop { number } duration - Duration for every slide - Deafult: 5000.
+   * @prop { boolean } autoPlay - Slider auto play - Deafult: false.
    * @prop { boolean } loop - Slider will re-start from the beginnign - Deafult: true.
    * @prop { boolean } transition - Animated transition on change slide - Deafult: true.
    * @prop { boolean } cover - Image style, if false the applyed style is contain. - Deafult: true(cover).
@@ -47,21 +51,72 @@ const unsplash = new Unsplash({
    * @prop { object } dotStyle - Style to apply on the dots.
    * @prop { object } arrowStyle - Style to apply on the arrows.
    * @prop { string } primary - Color to apply on the default dot - must be valid color ('black', '#000', rgb(0,0,0)).
-   * @prop { string } secndary - Color to apply on the active dot - must be valid color ('black', '#000', rgb(0,0,0)).
+   * @prop { string } secondary - Color to apply on the active dot - must be valid color ('black', '#000', rgb(0,0,0)).
    * @prop { url } arrowLeftImg - Image for the left arrow.
    * @prop { url } arrowRightImg - Image for the right arrow.
    * @prop { func } callback - Callback function on change slide @param { index }.
    * @prop { url[]! } images - Array of images.
+   * @prop { string[]! } titles - Array of title for each image, if passed shouldn't be null.
    * @prop { string[]! } captions - Array of captions for each image, if passed shouldn't be null.
    */
+
+const defaultState = {
+  images: [], 
+  authors: [], 
+  descriptions: [], 
+  index: 0, 
+  swipe: false, 
+  cover: true, 
+  invert: false, 
+  arrowHover: false, 
+  transition: true, 
+  loop: true, 
+  autoPlay: false, 
+  titles: true, 
+  captions: false, 
+  duration: 5000,
+};
+
+const style = {
+  containerStyle: {
+    width: '100%',
+  },
+  slideStyle: {
+    width: '80%',
+    height: '90%',
+    margin: '5% 10%',
+    boxShadow: '0 2px 20px -1px #2222',
+    position: 'relative',
+    borderRadius: '2px',
+  },
+  taglineStyle: {
+    background: '#FFF',
+  },
+  titleStyle: {
+    fontWeight: 800,
+    fontSize: '1.2rem',
+  },
+  captionStyle: {
+    fontWeight: 500,
+    fontSize: '.8rem',
+  },
+  dotStyle: {
+    width: '25px',
+    height: '2px',
+    borderRadius: 0,
+    margin: '0px',
+  },
+}
+
 class App extends Component {
-  state = { images: [], authors: [], description: [] }
+  state = defaultState
 
   componentDidMount () {
     this.unsplashPhotos('sea')
+    this.setState({swipe:true})
   }
 
-  unsplashPhotos = (topic) => {
+  unsplashPhotos = topic => {
     unsplash.search.photos(topic, 1)
     .then(toJson)
     .then(({results}) => {
@@ -69,7 +124,7 @@ class App extends Component {
         this.setState({
           images: [...this.state.images, ...results.map(img=> img.urls.regular)],
           authors: [...this.state.authors, ...results.map(img=> img.user.name)],
-          description: [...this.state.description, ...results.map(img=> img.alt_description)],
+          descriptions: [...this.state.descriptions, ...results.map(img=> img.alt_description)],
         })
       }
     }).catch((err)=>{
@@ -77,50 +132,61 @@ class App extends Component {
     });
   }
 
+  handleCheckbox = e => {
+    const { name, checked } = e.target;
+    this.setState({[name]: checked})
+  }
+
   render() {
-    const { images, authors, description } = this.state
+    const { index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration } = this.state;
+    const { images, authors, descriptions, titles, captions, ...output } = this.state;
     return (
       <>
       <div className="title">GALLEREACT</div>
       <div className="payoff">Most custom slider ever</div>
-      <div className="Container">
-        <Slider 
-          containerStyle = {{
-            width: '100%',
-          }}
-          slideStyle = {{
-            width: '80%',
-            height: '90%',
-            margin: '5% 10%',
-            boxShadow: '0 2px 20px -1px #2222',
-            position: 'relative',
-          }}
-          taglineStyle={{
-            background: '#FFF',
-          }}
-          titleStyle={{
-            fontWeight: 800,
-            fontSize: '1.2rem',
-          }}
-          captionStyle={{
-            fontWeight: 500,
-            fontSize: '.8rem',
-          }}
-          dotStyle={{
-            width: '25px',
-            height: '2px',
-            borderRadius: 0,
-            margin: '0px',
-          }}
+      <div className="container">
+        <Slider
+          {...style}
           images={images}
-          titles={authors}
-          captions={description}
-          swipe
-        /> 
+          titles={titles ? authors : []}
+          captions={captions ? descriptions : []}
+          {...{index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration}}
+          arrowLeftImg='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/198/white-left-pointing-backhand-index_1f448.png'
+          arrowRightImg='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/198/white-right-pointing-backhand-index_1f449.png'
+        />
+        <div className="checks">
+          <label htmlFor="swipe">Swipe <input onChange={this.handleCheckbox} type="checkbox" checked={swipe} name="swipe"/></label>
+          <label htmlFor="cover">Cover <input onChange={this.handleCheckbox} type="checkbox" checked={cover} name="cover"/></label>
+          <label htmlFor="arrowHover">Arrow hover <input onChange={this.handleCheckbox} type="checkbox" checked={arrowHover} name="arrowHover"/></label>
+          <label htmlFor="transition">Transition <input onChange={this.handleCheckbox} type="checkbox" checked={transition} name="transition"/></label>
+          <label htmlFor="loop">Loop <input onChange={this.handleCheckbox}  type="checkbox" checked={loop} name="loop"/></label>
+          <label htmlFor="autoPlay">Auto play <input onChange={this.handleCheckbox} type="checkbox" checked={autoPlay} name="autoPlay"/></label>
+          <label htmlFor="titles">Titles <input onChange={this.handleCheckbox} type="checkbox" checked={titles} name="titles"/></label>
+          <label htmlFor="captions">Captions <input onChange={this.handleCheckbox} type="checkbox" checked={captions} name="captions"/></label>
+        </div>
+        <CodeBlock {...output}/>
+        {/* <label htmlFor="index">index <input onChange={this.handleChange} type="number" name="index"/> </label>*/}
+        {/* <label htmlFor="primary">primary <input onChange={this.handleChange} type="color" name="primary"/> </label>*/}
+        {/* <label htmlFor="secondary">secondary <input onChange={this.handleChange} type="color" name="secondary"/> </label>*/}
+        {/* <label htmlFor="duration">duration <input onChange={this.handleChange} type="range" min="1" max="10000" name="duration"/> </label>*/}
       </div>
       </>
     );
   }
+}
+
+const CodeBlock = props => {
+  useEffect(()=> Prism.highlightAll())
+  return (
+    <pre>
+      <code className="language-jsx">
+        {`<Slider images={[]} ${Object.entries(props).reduce((a,[k,v]) => 
+            v !== defaultState[k] ? a + `${k}={${v}} ` : a
+          ,'')}${Object.entries(style).reduce((a,[k,v]) =>
+            a + `${k}={${JSON.stringify(v).replace(/"([^(")"]+)":/g,"$1:")}} `, '')} />`}
+      </code>
+    </pre>
+  )
 }
 
 export default App;

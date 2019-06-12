@@ -1,6 +1,6 @@
 @import url("https://use.typekit.net/zyq2bre.css");
 
-.Container {
+.container {
   text-align: center;
   height: 95vh;
   width: 70vw;
@@ -25,12 +25,30 @@
   font-style: normal;
 }
 
+.checks {
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.checks label{
+  margin: 10px auto;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  font-size: .9em;
+  font-weight: 600;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
 }
 
 @media only screen and (max-width: 600px) {
-  .Container {
+  .container {
     text-align: center;
     height: 70vh;
     width: 100vw;
