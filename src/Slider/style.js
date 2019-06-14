@@ -48,6 +48,8 @@ export const Tagline = styled.div`
 
 export const Title = styled.div`
   margin: 10px;
+  margin-bottom: 5px;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,6 +69,7 @@ export const Arrows = styled.div`
   justify-content: space-between;
   align-items: center;
   transform: translate(0, -100%);
+  user-select: none;
 `;
 
 export const Arrow = styled.div`

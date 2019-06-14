@@ -18,9 +18,9 @@ const Slider = (props) => {
     cover=true,
     invert=false,
     loop=!props.swipe,
+    transition=true,
     arrowHover=false,
     swipe=false,
-    transition=true,
     callback,
     containerStyle,
     slideStyle,
@@ -45,6 +45,8 @@ const Slider = (props) => {
 
   const [state, setState] = useState(initialState);
   const slider = useRef();
+  
+  useEffect(() => {},[props])
 
   useEffect(() => {
     document.addEventListener('mouseup', reset, false);
@@ -54,7 +56,7 @@ const Slider = (props) => {
   useEffect(() => {
     const play = autoPlay && setTimeout(goToNextSlide, duration);
     return () => clearTimeout(play)
-  },[state.index])
+  },[state.index, props.autoPlay])
 
   useEffect(() => {
     goToSlide(index);
@@ -97,7 +99,7 @@ const Slider = (props) => {
 
   const goToPreviousSlide = () => {
     const { index } = state;
-    const i = index < images.length - 1 
+    const i = index > 0  
     ? index - 1 
     : loop ? images.length - 1 : index;
     goToSlide(i);
@@ -137,7 +139,7 @@ const Slider = (props) => {
           onTouchStart={lock} onTouchMove={drag} onTouchEnd={muve}
           onMouseDown={lock} onMouseMove={drag} onMouseUp={muve}
           sliderWidth={getWidth(slider)}
-          transition={transition}
+          transition={swipe || transition}
           index={state.index}
           translateDrag={state.translateDrag}
           translateDuration={state.translateDuration}
