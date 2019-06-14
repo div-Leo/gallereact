@@ -6,7 +6,7 @@ import ArrowLeft from '../../assets/ArrowLeft.svg';
 const LeftArrow = ({ goToPreviousSlide, arrowStyle, arrowHover, arrowLeftImg }) => {
   return (
     <s.ArrowL hover={arrowHover} onClick={goToPreviousSlide}>
-      <img src={arrowLeftImg || ArrowLeft} style={{arrowStyle}} alt="" />
+      <img src={arrowLeftImg || ArrowLeft} style={arrowStyle} alt="" />
     </s.ArrowL>
   );
 };
