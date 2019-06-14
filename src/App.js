@@ -1,38 +1,21 @@
-import React, { Component, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import Slider from './Slider'
-import './App.css';
+import Spinner from './components/Spinner';
+import CodeBlock from './components/CodeBlock';
+import Checkboxes from './components/Checkboxes';
+
+
+import { InputNumber } from 'antd';
+
+import './App.sass';
+
 import Unsplash, { toJson } from 'unsplash-js';
-import Prism from "prismjs";
-import 'prismjs/components/prism-jsx.min';
-import "./lightSyntax.css";
-
-
 const unsplash = new Unsplash({
   applicationId: '856a49ae384c50aca5ecfcd61037378e4fceaa65b1914cc924a4c6cd3faa2ee7',
   secret: '9e81deea92517885ed3dfc73ef21c58c340ed9f444bf4a3d8c0c05141fa1f75b',
   callbackUrl: 'urn:ietf:wg:oauth:2.0:oob'
 });
-
-// "https://images.unsplash.com/photo-1542720197-a314c3ad289e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1546415614-d00a3795dbfa?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1550626847-1df7517db9cb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1542315291377-a38c9fe57384?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1542785853-cf202360bca0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1489321336462-efe12c02d099?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1542228556-11d73301e280?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1542683549-cf229d5ea6f8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1542402972-2d8a2c7df5a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/39/yvDPJ8ZSmSVob7pRxIvU_IMG_40322.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1515948482931-76fc11d130ac?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1489024091080-de8bc07232d4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1475615787683-f1a161b002b1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1480431301262-4cef4b7129e2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1508978053361-f0df91897005?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1484407823139-504dc061ac01?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1518591497912-374ba74e8fb0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1440996906419-1752be8fb1d1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
-// "https://images.unsplash.com/photo-1551904780-575168998951?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjY0MzM5fQ"
 
 /**
    * Slider Component.
@@ -66,8 +49,7 @@ const defaultState = {
   descriptions: [], 
   index: 0, 
   swipe: false, 
-  cover: true, 
-  invert: false, 
+  cover: true,
   arrowHover: false, 
   transition: true, 
   loop: true, 
@@ -75,6 +57,8 @@ const defaultState = {
   titles: true, 
   captions: false, 
   duration: 5000,
+  primary: '#CCCCCC',
+  secondary: '#333333',
 };
 
 const style = {
@@ -87,7 +71,6 @@ const style = {
     margin: '5% 10%',
     boxShadow: '0 2px 20px -1px #2222',
     position: 'relative',
-    borderRadius: '2px',
   },
   taglineStyle: {
     background: '#FFF',
@@ -102,91 +85,75 @@ const style = {
   },
   dotStyle: {
     width: '25px',
-    height: '2px',
+    height: '3px',
     borderRadius: 0,
     margin: '0px',
   },
 }
 
-class App extends Component {
-  state = defaultState
+const App = () => {
+  const [state, setState ] = useState(defaultState)
 
-  componentDidMount () {
-    this.unsplashPhotos('sea')
-    this.setState({swipe:true})
-  }
+  useEffect(() => {
+    setState(state => ({...state, swipe:true}))
+    unsplashPhotos('sea')
+  }, []);
 
-  unsplashPhotos = topic => {
+  const unsplashPhotos = topic => {
     unsplash.search.photos(topic, 1)
     .then(toJson)
     .then(({results}) => {
       if (results.length) {
-        this.setState({
-          images: [...this.state.images, ...results.map(img=> img.urls.regular)],
-          authors: [...this.state.authors, ...results.map(img=> img.user.name)],
-          descriptions: [...this.state.descriptions, ...results.map(img=> img.alt_description)],
-        })
+        setState(state => ({
+          ...state,
+          images: [...state.images, ...results.map(img=> img.urls.regular)],
+          authors: [...state.authors, ...results.map(img=> img.user.name)],
+          descriptions: [...state.descriptions, ...results.map(img=> img.alt_description)],
+        }))
       }
     }).catch((err)=>{
       console.error(err);
     });
   }
 
-  handleCheckbox = e => {
-    const { name, checked } = e.target;
-    this.setState({[name]: checked})
+  const handleCheckbox = e => {
+    const { value, checked } = e.target;
+    setState(state => ({...state, [value]: checked}))
+  }
+  const handleIndex = e => {
+    console.log('e', e);
   }
 
-  render() {
-    const { index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration } = this.state;
-    const { images, authors, descriptions, titles, captions, ...output } = this.state;
-    return (
-      <>
+  const { index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration } = state;
+  const { images, authors, descriptions, titles, captions, ...output } = state;
+  return (
+    <>
+    <div className="navbar">
       <div className="title">GALLEREACT</div>
       <div className="payoff">Most custom slider ever</div>
-      <div className="container">
-        <Slider
+    </div>
+    <div className="container">
+      { images.length && (<Slider
           {...style}
           images={images}
           titles={titles ? authors : []}
           captions={captions ? descriptions : []}
           {...{index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration}}
-          arrowLeftImg='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/198/white-left-pointing-backhand-index_1f448.png'
-          arrowRightImg='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/198/white-right-pointing-backhand-index_1f449.png'
-        />
-        <div className="checks">
-          <label htmlFor="swipe">Swipe <input onChange={this.handleCheckbox} type="checkbox" checked={swipe} name="swipe"/></label>
-          <label htmlFor="cover">Cover <input onChange={this.handleCheckbox} type="checkbox" checked={cover} name="cover"/></label>
-          <label htmlFor="arrowHover">Arrow hover <input onChange={this.handleCheckbox} type="checkbox" checked={arrowHover} name="arrowHover"/></label>
-          <label htmlFor="transition">Transition <input onChange={this.handleCheckbox} type="checkbox" checked={transition} name="transition"/></label>
-          <label htmlFor="loop">Loop <input onChange={this.handleCheckbox}  type="checkbox" checked={loop} name="loop"/></label>
-          <label htmlFor="autoPlay">Auto play <input onChange={this.handleCheckbox} type="checkbox" checked={autoPlay} name="autoPlay"/></label>
-          <label htmlFor="titles">Titles <input onChange={this.handleCheckbox} type="checkbox" checked={titles} name="titles"/></label>
-          <label htmlFor="captions">Captions <input onChange={this.handleCheckbox} type="checkbox" checked={captions} name="captions"/></label>
-        </div>
-        <CodeBlock {...output}/>
-        {/* <label htmlFor="index">index <input onChange={this.handleChange} type="number" name="index"/> </label>*/}
-        {/* <label htmlFor="primary">primary <input onChange={this.handleChange} type="color" name="primary"/> </label>*/}
-        {/* <label htmlFor="secondary">secondary <input onChange={this.handleChange} type="color" name="secondary"/> </label>*/}
-        {/* <label htmlFor="duration">duration <input onChange={this.handleChange} type="range" min="1" max="10000" name="duration"/> </label>*/}
+        /> ) || <Spinner/>}
       </div>
-      </>
-    );
-  }
+      <Checkboxes {...{swipe, cover, arrowHover, transition, loop, autoPlay, titles, captions, handleCheckbox}}  />
+      <div className="colors">
+        <label htmlFor="primary"> Primary <input onChange={({target})=>setState(state=>({...state, primary:target.value}))} type="color" value={primary} name="primary"/> </label>
+        <label htmlFor="secondary"> Secondary <input onChange={({target})=>setState(state=>({...state, secondary:target.value}))} type="color" value={secondary} name="secondary"/> </label>
+      </div>
+      {/* <InputNumber min={0} max={images.length-1} defaultValue={1} onChange={handleIndex} /> */}
+      {/* <label htmlFor="index">index <input type="number" name="index"/> </label>*/}
+      {/* <label htmlFor="duration">duration <input type="range" min="1" max="10000" name="duration"/> </label>*/}
+      <CodeBlock {...{ defaultState, style,...output}}/>
+      <br/><br/><br/>
+    </>
+  );
 }
 
-const CodeBlock = props => {
-  useEffect(()=> Prism.highlightAll())
-  return (
-    <pre>
-      <code className="language-jsx">
-        {`<Slider images={[]} ${Object.entries(props).reduce((a,[k,v]) => 
-            v !== defaultState[k] ? a + `${k}={${v}} ` : a
-          ,'')}${Object.entries(style).reduce((a,[k,v]) =>
-            a + `${k}={${JSON.stringify(v).replace(/"([^(")"]+)":/g,"$1:")}} `, '')} />`}
-      </code>
-    </pre>
-  )
-}
 
 export default App;
