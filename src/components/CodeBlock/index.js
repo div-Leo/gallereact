@@ -9,10 +9,10 @@ const CodeBlock = ({defaultState, style, ...props}) => {
   return (
     <pre>
       <code className="language-jsx">
-        {`<Slider images={[]} ${Object.entries(props).reduce((a,[k,v]) => 
-            v !== defaultState[k] ? a + `${k}={${v[0] === '#' ? JSON.stringify(v) : v}} ` : a
+        {`<Slider\n  images={[/* array of images */]} ${Object.entries(props).reduce((a,[k,v]) => 
+            v !== defaultState[k] ? a + `\n  ${k}={${v[0] === '#' ? JSON.stringify(v) : v}} ` : a
           ,'')}${Object.entries(style).reduce((a,[k,v]) =>
-            a + `${k}={${JSON.stringify(v).replace(/"([^(")"]+)":/g,"$1:")}} `, '')} />`}
+            a + (Object.keys(v).length ? `\n  ${k}={${JSON.stringify(v).replace(/"([^(")"]+)":/g,"$1:")}} ` : ''), '')} \n/>`}
       </code>
     </pre>
   )
