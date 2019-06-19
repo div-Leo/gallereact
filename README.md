@@ -1,4 +1,5 @@
-   * Slider Component.
+# Gallereact.
+
    * @prop { boolean } autoPlay - Slider auto play - Deafult: false.
    * @prop { number } duration - Duration for every slide - Deafult: 5000.
    * @prop { boolean } transition - Animated transition on change slide - Deafult: true.
