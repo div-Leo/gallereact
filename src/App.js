@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import Slider from './Slider'
 import Spinner from './components/Spinner';
+import Navbar from './components/Navbar';
 import CodeBlock from './components/CodeBlock';
 import Checkboxes from './components/Checkboxes';
-
-
-import { InputNumber } from 'antd';
+import CodeEditor from './components/CodeEditor';
 
 import './App.sass';
 
@@ -30,10 +29,12 @@ const unsplash = new Unsplash({
    * @prop { boolean } arrowHover - Show on over - Deafult: false(shown).
    * @prop { object } containerStyle - Style to apply on the container.
    * @prop { object } slideStyle - Style to apply on the single slide.
-   * @prop { object } captionStyle - Style to apply on the slide captions.
    * @prop { object } dotStyle - Style to apply on the dots.
    * @prop { object } arrowStyle - Style to apply on the arrows.
-   * @prop { string } primary - Color to apply on the default dot - must be valid color ('black', '#000', rgb(0,0,0)).
+   * @prop { object } taglineStyle - Style to apply on the tagline.
+   * @prop { object } titleStyle - Style to apply on the tagline title.
+   * @prop { object } captionStyle - Style to apply on the tagline caption.
+   * @prop { string } primary - Color to apply on the default arrow - must be valid color ('black', '#000', rgb(0,0,0)).
    * @prop { string } secondary - Color to apply on the active dot - must be valid color ('black', '#000', rgb(0,0,0)).
    * @prop { url } arrowLeftImg - Image for the left arrow.
    * @prop { url } arrowRightImg - Image for the right arrow.
@@ -61,7 +62,7 @@ const defaultState = {
   secondary: '#333333',
 };
 
-const style = {
+const defaultStyle = {
   containerStyle: {
     width: '100%',
   },
@@ -89,10 +90,12 @@ const style = {
     borderRadius: 0,
     margin: '0px',
   },
+  arrowStyle:''
 }
 
 const App = () => {
   const [state, setState ] = useState(defaultState)
+  const [style, setStyle ] = useState(defaultStyle)
 
   useEffect(() => {
     setState(state => ({...state, swipe:true}))
@@ -120,37 +123,37 @@ const App = () => {
     const { value, checked } = e.target;
     setState(state => ({...state, [value]: checked}))
   }
-  const handleIndex = e => {
-    console.log('e', e);
-  }
+
+  const handleColorChange = ({target}) =>
+    setState(state=>({...state, primary:target.value}))
 
   const { index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration } = state;
   const { images, authors, descriptions, titles, captions, ...output } = state;
   return (
     <>
-    <div className="navbar">
-      <div className="title">GALLEREACT</div>
-      <div className="payoff">Most custom slider ever</div>
-    </div>
-    <div className="container">
-      { images.length && (<Slider
+      <Navbar/>
+      <div className="slider_container">
+        { images.length ?
+        (<Slider
           {...style}
           images={images}
           titles={titles ? authors : []}
           captions={captions ? descriptions : []}
           {...{index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration}}
-        /> ) || <Spinner/>}
+        /> ) : <Spinner/>}
       </div>
+    <div className="settings_container">
       <Checkboxes {...{swipe, cover, arrowHover, transition, loop, autoPlay, titles, captions, handleCheckbox}}  />
       <div className="colors">
-        <label htmlFor="primary"> Primary <input onChange={({target})=>setState(state=>({...state, primary:target.value}))} type="color" value={primary} name="primary"/> </label>
-        <label htmlFor="secondary"> Secondary <input onChange={({target})=>setState(state=>({...state, secondary:target.value}))} type="color" value={secondary} name="secondary"/> </label>
+        <label htmlFor="primary"> Primary <input onChange={handleColorChange} type="color" value={primary} name="primary"/> </label>
+        <label htmlFor="secondary"> Secondary <input onChange={handleColorChange} type="color" value={secondary} name="secondary"/> </label>
       </div>
-      {/* <InputNumber min={0} max={images.length-1} defaultValue={1} onChange={handleIndex} /> */}
-      {/* <label htmlFor="index">index <input type="number" name="index"/> </label>*/}
-      {/* <label htmlFor="duration">duration <input type="range" min="1" max="10000" name="duration"/> </label>*/}
+      {Object.keys(style).map(styleClass => 
+        <CodeEditor key={styleClass} defaultCode={style[styleClass]} setStyle={setStyle} name={styleClass}/>
+      )}
       <CodeBlock {...{ defaultState, style,...output}}/>
       <br/><br/><br/>
+    </div>
     </>
   );
 }

@@ -4,7 +4,11 @@
   box-sizing: border-box
   outline: none
 
-.container
+.settings_container
+  max-width: 600px
+  margin: 0 auto
+
+.slider_container
   text-align: center
   height: 95vh
   width: 70vw
@@ -28,11 +32,25 @@
   font-style: normal
   color: #333
 
+.checks
+  width: 40vw
+  margin: auto
+  margin-left: 20% 
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  align-content: space-between
+
+.checks label
+  width: 45% 
+  margin: 5px !important
+  text-align: start
+  font-weight: 600
+
 .colors
-  width: 60vw
   margin: 20px auto
   display: flex
-  justify-content: space-between
+  justify-content: space-around
 
   & label
     display: flex
@@ -53,8 +71,12 @@
   border-radius: 5px
   box-shadow: 0 2px 20px -1px #2222
 
+::selection
+  background: #eee !important
+  color: inherit
+
 @media only screen and (max-width: 600px)
-  .container
+  .slider_container
     text-align: center
     height: 70vh
     width: 100vw
@@ -73,5 +95,6 @@
 
   .checks
     width: 70vw
+    margin-left: 20% 
 
 
