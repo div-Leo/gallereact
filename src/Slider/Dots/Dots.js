@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as s from '../style.js';
 
-const Dots = ({ index, images, handleDotClick, dotStyle, invert, primary = '#CCC', secondary = '#333'}) => {
+const Dots = ({ index, images, handleDotClick, dotStyle, primary = '#CCC', secondary = '#333'}) => {
   return (
     <s.DotsContainer>
       {images.map((_, id) => (
@@ -10,7 +10,7 @@ const Dots = ({ index, images, handleDotClick, dotStyle, invert, primary = '#CCC
             key={id}
             style={dotStyle} 
             active={id === index} 
-            invert={invert ? {a:primary, b:secondary} : {a:secondary, b:primary}} 
+            color={{a:primary, b:secondary}}
             onClick={handleDotClick.bind(null,id)} 
           />
       ))}

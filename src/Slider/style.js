@@ -20,7 +20,7 @@ export const Slider = styled.div`
   transform: translateX(${({ sliderWidth, index, translateDrag }) => `${-(index * sliderWidth) + translateDrag}px`});
   transition:  
     ${({ transition, translateDuration }) => 
-      transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDuration * .5}s` : 'none'};
+      transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDuration * 0.5}s` : 'none'};
 `;
 
 export const Slide = styled.div`
@@ -116,7 +116,7 @@ export const DotsContainer = styled.div`
 `;
 
 export const Dot = styled.div`
-  background: ${({ active, invert }) => active ? invert.a : invert.b};
+  background: ${({ active, color }) => active ? color.b : color.a};
   display: inline-block;
   width: 6px;
   height: 6px;
