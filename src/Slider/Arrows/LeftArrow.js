@@ -1,7 +1,7 @@
 import React from 'react';
 import * as s from '../style.js';
 
-import ArrowLeft from '../../assets/ArrowLeft.svg';
+import ArrowLeft from './assets/ArrowLeft.svg';
 
 const LeftArrow = ({ goToPreviousSlide, arrowStyle, arrowHover, arrowLeftImg }) => {
   return (
