@@ -2,7 +2,7 @@
   "name": "gallereact",
   "version": "1.0.0",
   "description": "React customizable gallery slider.",
-  "main": "build/index.js",
+  "main": "./build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
@@ -24,10 +24,13 @@
     "slider",
     "slideshow"
   ],
+  "files": [
+    "build/"
+  ],
   "license": "ISC",
   "peerDependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "styled-components": ">= 4"
   },
   "devDependencies": {
