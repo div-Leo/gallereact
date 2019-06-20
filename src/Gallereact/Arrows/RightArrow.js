@@ -1,12 +1,13 @@
 import React from 'react';
 import * as s from '../style.js';
 
-import ArrowRight from './assets/ArrowRight.svg';
-
-const RightArrow = ({ goToNextSlide, arrowStyle, arrowHover, arrowRightImg }) => {
+const RightArrow = ({ goToNextSlide, arrowStyle, arrowHover, arrowRightImg, primary }) => {
   return (
     <s.ArrowR hover={arrowHover} onClick={goToNextSlide}>
-      <img src={arrowRightImg || ArrowRight} style={arrowStyle} alt="" />
+      { arrowRightImg 
+        ? <img src={arrowRightImg} style={arrowStyle} alt="" />
+        : <s.ArrowIcon right style={arrowStyle} primary={primary} ></s.ArrowIcon>
+      }
     </s.ArrowR>
   );
 };

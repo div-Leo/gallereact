@@ -79,7 +79,7 @@ export const Arrow = styled.div`
   display: flex;
   align-items: center;
   img{
-    width: 50px;
+    width: 40px;
     transform: translate(0, -50%);
     transition: opacity 0.4s;
   };
@@ -100,6 +100,15 @@ export const ArrowR = styled(Arrow)`
   img{
     opacity: ${({ hover }) => hover ? '0' : '1'};
   }
+`;
+
+export const ArrowIcon = styled.div`
+  border: solid ${({ primary }) => primary};
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  margin: 20px;
+  padding: 7px;
+  transform: rotate(${({ right }) => right ? '-45deg' : '135deg'});
 `;
 
 export const DotsContainer = styled.div`

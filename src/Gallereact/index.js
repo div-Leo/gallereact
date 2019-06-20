@@ -154,15 +154,15 @@ const Slider = (props) => {
             </s.Slide>
             )}
         </s.Slider>
+        {!swipe && <s.Arrows>
+        <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide, primary}}/>
+        <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide, primary}}/>
+      </s.Arrows>}
       </s.Gallery>
       <Dots
         index={state.index}
         {...{images, handleDotClick, dotStyle, invert, primary, secondary,}}
         />
-      {!swipe && <s.Arrows>
-        <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide}}/>
-        <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide}}/>
-      </s.Arrows>}
     </s.Container>
   );
 }
