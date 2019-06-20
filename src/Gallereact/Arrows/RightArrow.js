@@ -1,7 +1,7 @@
 import React from 'react';
 import * as s from '../style.js';
 
-const RightArrow = ({ goToNextSlide, arrowStyle, arrowHover, arrowRightImg, primary }) => {
+const RightArrow = ({ goToNextSlide, arrowStyle, arrowHover, arrowRightImg, primary  = '#CCC'}) => {
   return (
     <s.ArrowR hover={arrowHover} onClick={goToNextSlide}>
       { arrowRightImg 

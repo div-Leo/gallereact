@@ -1,7 +1,7 @@
 import React from 'react';
 import * as s from '../style.js';
 
-const LeftArrow = ({ goToPreviousSlide, arrowStyle, arrowHover, arrowLeftImg, primary }) => {
+const LeftArrow = ({ goToPreviousSlide, arrowStyle, arrowHover, arrowLeftImg, primary = '#CCC' }) => {
   return (
     <s.ArrowL hover={arrowHover} onClick={goToPreviousSlide}>
       { arrowLeftImg 
