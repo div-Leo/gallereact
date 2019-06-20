@@ -12,6 +12,13 @@
     "name": "Leonardo Di Vittorio",
     "email": "leonardo.divittorio@live.it"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leon31/gallereact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Leon31/gallereact/issues"
+  },
   "keywords": [
     "carousel",
     "gallery",
@@ -28,22 +35,22 @@
     "build/"
   ],
   "license": "ISC",
+  "peerDependencies": {
+    "react": ">= 16.8",
+    "react-dom": ">= 16.8"
+  },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-react": "^6.24.1",
-    "styled-components": "^4.3.1",
-    "svg-inline-loader": "^0.8.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-inline-react-svg": "^1.1.0",
+    "styled-components": "^4.3.2",
     "webpack-cli": "^3.3.4"
   },
   "dependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "styled-components": ">= 4",
-    "webpack": "^4.34.0"
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^4.35.0"
   }
 }
