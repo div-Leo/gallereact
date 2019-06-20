@@ -28,11 +28,6 @@
     "build/"
   ],
   "license": "ISC",
-  "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "styled-components": ">= 4"
-  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -46,6 +41,9 @@
     "webpack-cli": "^3.3.4"
   },
   "dependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "styled-components": ">= 4",
     "webpack": "^4.34.0"
   }
 }
