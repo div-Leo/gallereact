@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Slider from './Slider'
+import Gallereact from 'gallereact'
 import Spinner from './components/Spinner';
 import Navbar from './components/Navbar';
 import CodeBlock from './components/CodeBlock';
@@ -10,6 +10,7 @@ import CodeEditor from './components/CodeEditor';
 import './App.sass';
 
 import Unsplash, { toJson } from 'unsplash-js';
+
 const unsplash = new Unsplash({
   applicationId: '856a49ae384c50aca5ecfcd61037378e4fceaa65b1914cc924a4c6cd3faa2ee7',
   secret: '9e81deea92517885ed3dfc73ef21c58c340ed9f444bf4a3d8c0c05141fa1f75b',
@@ -125,7 +126,7 @@ const App = () => {
   }
 
   const handleColorChange = ({target}) =>
-    setState(state=>({...state, primary:target.value}))
+    setState(state=>({...state, [target.name]:target.value}))
 
   const { index, swipe, cover, invert, arrowHover, transition, loop, autoPlay, primary, secondary, duration } = state;
   const { images, authors, descriptions, titles, captions, ...output } = state;
@@ -134,7 +135,7 @@ const App = () => {
       <Navbar/>
       <div className="slider_container">
         { images.length ?
-        (<Slider
+        (<Gallereact
           {...style}
           images={images}
           titles={titles ? authors : []}
