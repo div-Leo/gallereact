@@ -5,8 +5,8 @@ import * as s from '../style.js';
 function Tagline({curr, taglineStyle, titleStyle, captionStyle}) {
   return ( curr.title || curr.caption ?
     <s.Tagline style={taglineStyle}>
-      <s.Title style={titleStyle}>{curr.titles}</s.Title>
-      <s.Caption style={captionStyle}>{curr.captions}</s.Caption>
+      <s.Title style={titleStyle}>{curr.title}</s.Title>
+      <s.Caption style={captionStyle}>{curr.caption}</s.Caption>
     </s.Tagline> 
     : null
   )
