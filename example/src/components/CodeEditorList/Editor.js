@@ -18,10 +18,10 @@ const CodeEditor = ({ defaultCode, setStyle, name }) => {
 
   return (
     <div className="editor_container">
-      <h3 htmlFor="containerStyle">{name[0].toUpperCase() + name.slice(1).replace('Style','')}</h3>
+      <h3 htmlFor="containerStyle">{name[0].toUpperCase() + name.slice(1).replace('Style','')}</h3> 
       <Editor
         value={code}
-        onValueChange={(code) => setCode(code)}
+        onValueChange={setCode}
         highlight={code => highlight(code, languages.jsx)}
         padding={10}
         className="editor"
