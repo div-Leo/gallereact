@@ -27,10 +27,8 @@ const Slider = (props) => {
     taglineStyle,
     captionStyle,
     titleStyle,
-    captions = [],
-    titles = [],
-    primary,
-    secondary,
+    primaryColor,
+    secondaryColor,
     dotStyle,
     arrowStyle,
     arrowLeftImg,
@@ -78,9 +76,11 @@ const Slider = (props) => {
         }))
         goToSlide(state.index - s)
       }
-    } else setState(state => ({
-      ...state, translateDuration: 0.5, x0: null, translateDrag: 0
-    }));
+    } else {
+      setState(state => ({
+        ...state, translateDuration: 0.5, x0: null, translateDrag: 0
+      }));
+    }
   };
 
   const lock = (e) => {
@@ -100,8 +100,8 @@ const Slider = (props) => {
   const goToPreviousSlide = () => {
     const { index } = state;
     const i = index > 0  
-    ? index - 1 
-    : loop ? images.length - 1 : index;
+      ? index - 1 
+      : loop ? images.length - 1 : index;
     goToSlide(i);
   }
 
@@ -114,9 +114,7 @@ const Slider = (props) => {
   }
 
   const handleDotClick = i => {
-    const { index } = state;
-    if (i === index) return;
-    goToSlide(i);
+    i === state.index || goToSlide(i)
   }
 
   const goToSlide = index => {
@@ -128,10 +126,6 @@ const Slider = (props) => {
 
   const getWidth = ({current}) => current && current.getBoundingClientRect().width;
   
-  /**
-   * Render the entire slide with arrows and dots.
-   * @return { component } Container component.
-   */
   return (
     <s.Container>
       <s.Gallery cover={cover} style={containerStyle}>
@@ -149,19 +143,19 @@ const Slider = (props) => {
               style={slideStyle}
               cover={cover} 
               key={i} 
-              image={curr}> 
-              <Tagline {...{i, titles, captions, taglineStyle, titleStyle, captionStyle}} />
+              image={curr.image}> 
+              <Tagline {...{curr, taglineStyle, titleStyle, captionStyle}} />
             </s.Slide>
             )}
         </s.Slider>
         {!swipe && <s.Arrows>
-        <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide, primary}}/>
-        <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide, primary}}/>
-      </s.Arrows>}
+          <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide, primaryColor}}/>
+          <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide, primaryColor}}/>
+        </s.Arrows>}
       </s.Gallery>
       <Dots
         index={state.index}
-        {...{images, handleDotClick, dotStyle, invert, primary, secondary,}}
+        {...{images, handleDotClick, dotStyle, invert, primaryColor, secondaryColor}}
         />
     </s.Container>
   );

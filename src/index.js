@@ -1,2 +1,1 @@
-import Gallereact from './Gallereact';
-export default Gallereact;
+export { default } from './Gallereact'

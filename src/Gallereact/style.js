@@ -103,7 +103,7 @@ export const ArrowR = styled(Arrow)`
 `;
 
 export const ArrowIcon = styled.div`
-  border: solid ${({ primary }) => primary};
+  border: solid ${({ primaryColor }) => primaryColor};
   border-width: 0 4px 4px 0;
   display: inline-block;
   margin: 20px;

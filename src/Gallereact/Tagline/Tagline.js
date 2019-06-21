@@ -2,11 +2,11 @@ import React from 'react';
 
 import * as s from '../style.js';
 
-function Tagline({i, titles, captions, taglineStyle, titleStyle, captionStyle}) {
-  return ( titles.length || captions.length ?
+function Tagline({curr, taglineStyle, titleStyle, captionStyle}) {
+  return ( curr.titles || curr.captions ?
     <s.Tagline style={taglineStyle}>
-      <s.Title style={titleStyle}>{titles[i]}</s.Title>
-      <s.Caption style={captionStyle}>{captions[i]}</s.Caption>
+      <s.Title style={titleStyle}>{curr.titles}</s.Title>
+      <s.Caption style={captionStyle}>{curr.captions}</s.Caption>
     </s.Tagline> 
     : null
   )
