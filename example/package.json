@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.3",
-    "gallereact": "^1.0.3",
+    "gallereact": "^1.0.6",
     "node-sass": "^4.12.0",
     "prismjs": "^1.16.0",
     "react": "^16.8.0",

@@ -30,9 +30,7 @@ const defaultColors = {
 };
   
 const defaultStyle = {
-  containerStyle: {
-    width: '100%',
-  },
+  containerStyle: '',
   slideStyle: {
     width: '80%',
     height: '90%',
@@ -47,10 +45,7 @@ const defaultStyle = {
     fontWeight: 800,
     fontSize: '1.2rem',
   },
-  captionStyle: {
-    fontWeight: 500,
-    fontSize: '.8rem',
-  },
+  captionStyle: '',
   dotStyle: {
     width: '25px',
     height: '3px',
@@ -73,7 +68,6 @@ const App = () => {
   }, []);
 
   const { titles, captions }  = checkboxOpts;
-
   return (
     <>
       <Navbar/>
@@ -82,17 +76,17 @@ const App = () => {
           <Gallereact
             images={filterImages(images, titles, captions)}
             {...style}
+            {...colors}
             {...checkboxOpts}
-            {...defaultColors}
           /> 
           : <Spinner/>}
       </div>
-    <div className="settings_container">
-      <CheckboxList {...{checkboxOpts, setCheckboxOpts}} />
-      <ColorPicker {...{colors, setColors}} />
-      <CodeEditorList {...{style, setStyle}}/>
-      {/* <CodeBlock {...{ defaultCheckboxes, style, checkboxOpts}} /> */}
-    </div>
+      <div className="settings_container">
+        <CheckboxList {...{checkboxOpts, setCheckboxOpts}} />
+        <ColorPicker {...{colors, setColors}} />
+        <CodeEditorList {...{style, setStyle}}/>
+        <CodeBlock {...{ defaultCheckboxes, style, checkboxOpts, colors}} />
+      </div>
     </>
   );
 }
