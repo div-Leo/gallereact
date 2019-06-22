@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-import { RightArrow, LeftArrow } from './Arrows';
+import Arrow from './Arrows';
 import Dots from './Dots';
 import Tagline from './Tagline';
 
@@ -149,8 +149,8 @@ const Slider = (props) => {
             )}
         </s.Slider>
         {!swipe && <s.Arrows>
-          <LeftArrow {...{arrowStyle, arrowLeftImg, arrowHover, goToPreviousSlide, primaryColor}}/>
-          <RightArrow {...{arrowStyle, arrowRightImg, arrowHover, goToNextSlide, primaryColor}}/>
+          <Arrow {...{arrowStyle, arrowImg: arrowLeftImg, arrowHover, callToAction: goToPreviousSlide, primaryColor, direction: 'left'}}/>
+          <Arrow {...{arrowStyle, arrowImg: arrowRightImg, arrowHover, callToAction: goToNextSlide, primaryColor, direction: 'right'}}/>
         </s.Arrows>}
       </s.Gallery>
       <Dots

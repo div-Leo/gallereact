@@ -78,12 +78,14 @@ export const Arrow = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
+  opacity: ${({ hover }) => hover ? '0' : '1'};
+  justify-content: ${({ direction }) => direction === 'left' ? 'flex-start' : 'flex-end'};
   img{
     width: 40px;
     transform: translate(0, -50%);
     transition: opacity 0.4s;
   };
-  &:hover img{
+  &:hover{
     opacity: 1;
   }
 `;
@@ -108,7 +110,7 @@ export const ArrowIcon = styled.div`
   display: inline-block;
   margin: 20px;
   padding: 7px;
-  transform: rotate(${({ right }) => right ? '-45deg' : '135deg'});
+  transform: rotate(${({ direction }) => direction === 'left' ? '135deg' : '-45deg'});
 `;
 
 export const DotsContainer = styled.div`
