@@ -2,7 +2,12 @@ import React from 'react';
 
 import * as s from '../style.js';
 
-const Dots = ({ index, images, handleDotClick, dotStyle, primaryColor = '#CCC', secondaryColor = '#333'}) => {
+const Dots = ({ index, images, goToSlide, dotStyle, primaryColor = '#CCC', secondaryColor = '#333'}) => {
+  
+  const handleDotClick = i => {
+    i === index || goToSlide(i)
+  }
+
   return (
     <s.DotsContainer>
       {images.map((_, id) => (

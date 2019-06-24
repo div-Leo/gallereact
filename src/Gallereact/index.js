@@ -6,8 +6,7 @@ import Tagline from './Tagline';
 
 import * as s from './style.js';
 
-const initialState = {
-  index:0,
+const initialTranslateState = {
   translateDrag: 0,
   translateDuration: 0.5,
   x0: null,
@@ -35,92 +34,83 @@ const Slider = (props) => {
     arrowRightImg,
     autoPlay,
     duration=2000,
-    index,
+    inputIndex,
     images = []
   } = props;
 
   if (!images.length) return null;
 
-  const [state, setState] = useState(initialState);
+  const [translateState, setTranslateState] = useState(initialTranslateState);
+  const [index, setIndex] = useState(0);
   const slider = useRef();
-  
-  useEffect(() => {},[props])
+
+  useEffect(() => {
+    const play = autoPlay && setTimeout(goToNextSlide, duration);
+    return () => clearTimeout(play)
+  },[index, autoPlay])
+
+  useEffect(() => {
+    goToSlide(inputIndex);
+  },[inputIndex])
 
   useEffect(() => {
     document.addEventListener('mouseup', reset, false);
     document.addEventListener('touchend', reset, false);
   },[])
 
-  useEffect(() => {
-    const play = autoPlay && setTimeout(goToNextSlide, duration);
-    return () => clearTimeout(play)
-  },[state.index, props.autoPlay])
-
-  useEffect(() => {
-    goToSlide(index);
-  },[index])
-
   const reset = () => {
-    setState(state => ({ ...state, x0: null, translateDrag: 0, translateDuration: 0.5}));
+    setTranslateState(initialTranslateState);
   };
 
   const muve = e => {
     const { clientX } = unify(e)
-    if (state.x0) {
-      const dx = clientX - state.x0;
+    if (translateState.x0) {
+      const dx = clientX - translateState.x0;
       const s = Math.sign(dx);
       const f = +(s*dx/getWidth(slider)).toFixed(2);
       if(f > .2) {
-        setState(state => ({
+        setTranslateState(state => ({
           ...state, x0: null, translateDrag: 0, translateDuration: 1 - f,
         }))
-        goToSlide(state.index - s)
+        goToSlide(index - s)
       }
     } else {
-      setState(state => ({
-        ...state, translateDuration: 0.5, x0: null, translateDrag: 0
-      }));
+      setTranslateState(initialTranslateState);
     }
   };
 
   const lock = (e) => {
     const { clientX } = unify(e)
-    setState(state => ({...state, x0: clientX, translateDuration: 0}));
+    setTranslateState(state => ({...state, x0: clientX, translateDuration: 0}));
   };
 
   const drag = (e) => {
-    if (state.x0) {
+    if (translateState.x0) {
       const { clientX } = unify(e)
-      setState(state =>({...state, translateDrag: Math.round(clientX - state.x0)}));
+      setTranslateState(state =>({...state, translateDrag: Math.round(clientX - state.x0)}));
     }
   };
 
   const unify = (e) => e.changedTouches ? e.changedTouches[0] : e;
 
   const goToPreviousSlide = () => {
-    const { index } = state;
-    const i = index > 0  
-      ? index - 1 
-      : loop ? images.length - 1 : index;
+    let i = index;
+    if (index > 0) i = index - 1 
+    else if (loop) i = images.length - 1
     goToSlide(i);
   }
 
   const goToNextSlide = () => {
-    const { index } = state;
-    const i = index < images.length - 1 
-      ? index + 1 
-      : loop ? 0 : index;
+    let i = index;
+    if (index < images.length-1) i = index + 1 
+    else if (loop) i = 0
     goToSlide(i);
   }
 
-  const handleDotClick = i => {
-    i === state.index || goToSlide(i)
-  }
-
-  const goToSlide = index => {
-    if (index >= 0 && index < images.length) {
-      setState(state => ({ ...state, index }));
-      callback && callback(index)
+  const goToSlide = i => {
+    if (i >= 0 && i < images.length) {
+      setIndex(i);
+      callback && callback(i)
     }
   }
 
@@ -130,33 +120,35 @@ const Slider = (props) => {
     <s.Container>
       <s.Gallery cover={cover} style={containerStyle}>
         <s.Slider
-          onTouchStart={lock} onTouchMove={drag} onTouchEnd={muve}
-          onMouseDown={lock} onMouseMove={drag} onMouseUp={muve}
+          onTouchStart={lock} 
+          onTouchMove={drag} 
+          onTouchEnd={muve}
+          onMouseDown={lock} 
+          onMouseMove={drag} 
+          onMouseUp={muve}
           sliderWidth={getWidth(slider)}
           transition={swipe || transition}
-          index={state.index}
-          translateDrag={state.translateDrag}
-          translateDuration={state.translateDuration}
+          index={index}
+          translateDrag={translateState.translateDrag}
+          translateDuration={translateState.translateDuration}
           ref={slider}>
-          {images.map((curr, i) => 
-            <s.Slide 
-              style={slideStyle}
-              cover={cover} 
-              key={i} 
-              image={curr.image}> 
-              <Tagline {...{curr, taglineStyle, titleStyle, captionStyle}} />
-            </s.Slide>
+            {images.map((curr, i) => 
+              <s.Slide 
+                key={i}
+                style={slideStyle}
+                cover={cover}
+                image={curr.image}>
+                  <Tagline {...{curr, taglineStyle, titleStyle, captionStyle}} />
+              </s.Slide>
             )}
         </s.Slider>
-        {!swipe && <s.Arrows>
-          <Arrow {...{arrowStyle, arrowImg: arrowLeftImg, arrowHover, callToAction: goToPreviousSlide, primaryColor, direction: 'left'}}/>
-          <Arrow {...{arrowStyle, arrowImg: arrowRightImg, arrowHover, callToAction: goToNextSlide, primaryColor, direction: 'right'}}/>
-        </s.Arrows>}
+        {!swipe && 
+          <s.Arrows>
+            <Arrow {...{arrowStyle, arrowImg: arrowLeftImg, arrowHover, callToAction: goToPreviousSlide, primaryColor, direction: 'left'}}/>
+            <Arrow {...{arrowStyle, arrowImg: arrowRightImg, arrowHover, callToAction: goToNextSlide, primaryColor, direction: 'right'}}/>
+          </s.Arrows>}
       </s.Gallery>
-      <Dots
-        index={state.index}
-        {...{images, handleDotClick, dotStyle, invert, primaryColor, secondaryColor}}
-        />
+      <Dots {...{index, images, goToSlide, dotStyle, invert, primaryColor, secondaryColor}}/>
     </s.Container>
   );
 }
