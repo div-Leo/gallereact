@@ -1,7 +1,7 @@
 import React from 'react';
 import * as s from '../style.js';
 
-const Arrow = ({ callToAction, direction, arrowStyle, arrowHover, arrowImg, primaryColor = '#CCC' }) => {
+const Arrow = ({ callToAction, direction, arrowStyle, arrowHover, arrowImg, primaryColor }) => {
   return (
     <s.Arrow direction={direction} hover={arrowHover} onClick={callToAction}>
       { arrowImg 

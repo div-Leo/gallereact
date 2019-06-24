@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import GallereactConsumer from '../GallereactContext'
+
 
 import * as s from '../style.js';
 
-const Dots = ({ index, images, goToSlide, dotStyle, primaryColor = '#CCC', secondaryColor = '#333'}) => {
+const Dots = () => {
+  const {
+    index,
+    images,
+    goToSlide,
+    dotStyle,
+    primaryColor='#CCC',
+    secondaryColor='#333'
+  } = useContext(GallereactConsumer)
   
   const handleDotClick = i => {
     i === index || goToSlide(i)
