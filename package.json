@@ -35,11 +35,7 @@
   "files": [
     "build/"
   ],
-  "license": "ISC",
-  "peerDependencies": {
-    "react": ">= 16.8",
-    "react-dom": ">= 16.8"
-  },
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
@@ -49,10 +45,11 @@
     "babel-plugin-inline-react-svg": "^1.1.0",
     "styled-components": "^4.3.2",
     "js-yaml": ">=3.13.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "webpack-cli": "^3.3.4"
   },
   "dependencies": {
-    "svg-inline-loader": "^0.8.0",
     "webpack": "^4.35.0"
   }
 }

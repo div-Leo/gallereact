@@ -4,11 +4,8 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.3",
-    "gallereact": "^1.0.6",
     "node-sass": "^4.12.0",
     "prismjs": "^1.16.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
     "react-scripts": "2.1.3",
     "react-simple-code-editor": "^0.9.11",
     "styled-components": "^4.1.3",
