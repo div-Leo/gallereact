@@ -76,8 +76,8 @@ export const Arrow = styled.div`
   width: 40%;
   height: 100%;
   cursor: pointer;
-  display: flex;
   align-items: center;
+  display: flex;
   opacity: ${({ hover }) => hover ? '0' : '1'};
   justify-content: ${({ direction }) => direction === 'left' ? 'flex-start' : 'flex-end'};
   img{
@@ -107,7 +107,7 @@ export const ArrowR = styled(Arrow)`
 export const ArrowIcon = styled.div`
   border: solid ${({ primaryColor }) => primaryColor};
   border-width: 0 4px 4px 0;
-  display: inline-block;
+  display: ${({ displayArrows }) => displayArrows ? 'flex' : 'none'};
   margin: 20px;
   padding: 7px;
   transform: rotate(${({ direction }) => direction === 'left' ? '135deg' : '-45deg'});
@@ -119,7 +119,7 @@ export const DotsContainer = styled.div`
   width: 100%;
   height: 10%;
   margin: auto;
-  display: flex;
+  display: ${({ displayDot }) => displayDot ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   z-index: 10;
@@ -127,11 +127,11 @@ export const DotsContainer = styled.div`
 `;
 
 export const Dot = styled.div`
-  background: ${({ active, color }) => active ? color.b : color.a};
+  background: ${({ active, colors }) => active ? colors.b : colors.a};
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 5px;
+  width: 10px;
+  height: 10px;
+  margin: 0 10px;
   cursor: pointer;
   border-radius: 50%;
 `;

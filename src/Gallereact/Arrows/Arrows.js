@@ -8,7 +8,8 @@ import * as s from '../style.js';
 const Arrows = () => {
   const {
     arrowStyle,
-    arrowHover=false,
+    displayArrows=true,
+    arrowOnHover=false,
     primaryColor='#CCC',
     arrowLeftImg,
     arrowRightImg,
@@ -23,10 +24,10 @@ const Arrows = () => {
   return !swipe && ( 
     <s.Arrows>
       {(loop || index > 0)
-        ? <Arrow {...{arrowStyle, arrowImg: arrowLeftImg, arrowHover, callToAction: goToPreviousSlide, primaryColor, direction: 'left'}}/>
+        ? <Arrow {...{arrowStyle, displayArrows, arrowImg: arrowLeftImg, arrowOnHover, callToAction: goToPreviousSlide, primaryColor, direction: 'left'}}/>
         : <div/>}
       { (loop || index < images.length-1) 
-        ? <Arrow {...{arrowStyle, arrowImg: arrowRightImg, arrowHover, callToAction: goToNextSlide, primaryColor, direction: 'right'}}/>
+        ? <Arrow {...{arrowStyle, displayArrows, arrowImg: arrowRightImg, arrowOnHover, callToAction: goToNextSlide, primaryColor, direction: 'right'}}/>
         : <div/>}
     </s.Arrows>
   )
