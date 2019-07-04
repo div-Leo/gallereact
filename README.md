@@ -2,6 +2,8 @@
 
 > Custom image slider
 
+Gallereact is a complete ready to use gallery slider, with lot of possible customizations. It works based on background images, which allows a better ration managing.  Just styling a div that contains the component with a height and a width the images will fit on that.
+
 ## Getting started
 
 ```bash
@@ -18,13 +20,24 @@ const MyComponent = () => {
     {image: 'http://image.url/1'},
     {image: 'http://image.url/2'}
   ];
+  
+  const style = {
+    container: {
+      width: '60vw',
+      height: '80vh'
+    }
+  }
                   
   return (
-   <Gallereact images={images} />
+    <div style={style.container}>
+      <Gallereact images={images} />
+    </div>
   )
 }
 
 ```
+
+
 
 ## Props
 
@@ -55,6 +68,7 @@ const MyComponent = () => {
 | `images`         |  Image[]!  |    -    |   true   |               Array of objects of type Image.                |
 
 
+
 ### Image 
 
 | Prop name |  Type   | Default | Required |     Description      |
@@ -64,25 +78,10 @@ const MyComponent = () => {
 | `caption` | String  |    -    |  false   | Caption of the image |
 
 
+
 ## Contributing
 
-Install the project:
-
-```bash
-git clone https://github.com/Leon31/gallereact.git
-cd galleract
-npm i
-npm start # to watch the files with webpack
-```
-
-Use `npm link` to use locally the package. Create your `create-react-app` or use the one inside the `/example` folder, inside the folder run `npm link galleract` in order to provide the component to the app.
-
-#### Rules to follow 
-
-* Follow the `.eslintrc` rules
-* Comment your code following [JS doc conventions](https://devdocs.io/jsdoc/about-getting-started)
-* Describe your changes in the pullrequest
-* Write [clean](https://github.com/ryanmcdermott/clean-code-javascript) code
+To contribue please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/LICENSE) 
 
 ## Contributors
 
@@ -91,5 +90,4 @@ Use `npm link` to use locally the package. Create your `create-react-app` or use
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Leon31/gallereact/blob/master/LICENSE) file for details.
-
 
