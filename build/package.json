@@ -27,8 +27,5 @@
     "slider",
     "slideshow"
   ],
-  "files": [
-    "./index.js"
-  ],
   "license": "MIT"
 }
