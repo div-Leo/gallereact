@@ -16,12 +16,14 @@ import './App.sass';
 const defaultCheckboxes = {
   swipe: false, 
   cover: true,
-  arrowHover: false, 
+  arrowOnHover: false, 
   transition: true, 
   loop: true, 
   autoPlay: false, 
   titles: true,
-  captions: false
+  captions: false,
+  displayDot: true,
+  displayArrows: true,
 };
 
 const defaultColors = {
@@ -64,7 +66,7 @@ const App = () => {
   useEffect(() => {
     setCheckboxOpts(checkboxOpts => ({...checkboxOpts, swipe:true}))
     unsplashPhotos('sea')
-      .then(images => setImages(images));
+      .then(images => images && setImages(images));
   }, []);
 
   const { titles, captions }  = checkboxOpts;
@@ -82,9 +84,13 @@ const App = () => {
           : <Spinner/>}
       </div>
       <div className="settings_container">
+        <h1>Booleans</h1>
         <CheckboxList {...{checkboxOpts, setCheckboxOpts}} />
+        <h1>Colors</h1>
         <ColorPicker {...{colors, setColors}} />
+        <h1>Styles</h1>
         <CodeEditorList {...{style, setStyle}}/>
+        <h1>Output code</h1>
         <CodeBlock {...{ defaultCheckboxes, style, checkboxOpts, colors}} />
       </div>
     </>

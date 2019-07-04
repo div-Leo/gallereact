@@ -9,7 +9,6 @@ const CodeBlock = ({defaultCheckboxes, style, checkboxOpts, colors}) => {
   const galleryOptions = {...checkboxOpts, ...colors}
   return (
     <div className="codeBlock_title">
-      <h2>Output code:</h2>
       <pre>
         <code className="language-jsx">
           {`<Slider\n  images={[/* array of images */]} ${Object.entries(galleryOptions).reduce((a,[k,v]) => 
