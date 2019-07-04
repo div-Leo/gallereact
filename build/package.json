@@ -1,0 +1,34 @@
+{
+  "name": "gallereact",
+  "version": "1.0.7",
+  "description": "React customizable gallery slider.",
+  "main": "./index.js",
+  "author": {
+    "name": "Leonardo Di Vittorio",
+    "email": "leonardo.divittorio@live.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leon31/gallereact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Leon31/gallereact/issues"
+  },
+  "homepage": "http://gallereact.surge.sh",
+  "keywords": [
+    "carousel",
+    "gallery",
+    "image gallery",
+    "image slider",
+    "react",
+    "react carousel",
+    "react slideshow",
+    "react gallery",
+    "slider",
+    "slideshow"
+  ],
+  "files": [
+    "build/"
+  ],
+  "license": "MIT"
+}
