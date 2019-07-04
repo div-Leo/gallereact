@@ -10,13 +10,14 @@ import * as s from './style.js';
 const Gallereact = (props) => {
   const {
     cover=true,
-    loop=!props.swipe,
+    loop=true,
     callback,
     containerStyle,
     autoPlay,
     duration=2000,
     inputIndex,
-    images=[]
+    images=[],
+    swipe=false
   } = props;
 
   if (!images.length) return null;
@@ -35,14 +36,14 @@ const Gallereact = (props) => {
   const goToPreviousSlide = () => {
     let i = index;
     if (index > 0) i = index - 1 
-    else if (loop) i = images.length - 1
+    else if (!swipe && loop) i = images.length - 1
     goToSlide(i);
   }
   
   const goToNextSlide = () => {
     let i = index;
     if (index < images.length-1) i = index + 1 
-    else if (loop) i = 0
+    else if (!swipe && loop) i = 0
     goToSlide(i);
   }
   
