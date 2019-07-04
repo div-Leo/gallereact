@@ -1,6 +1,6 @@
 {
   "name": "gallereact",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React customizable gallery slider.",
   "main": "./index.js",
   "author": {
@@ -28,7 +28,7 @@
     "slideshow"
   ],
   "files": [
-    "build/"
+    "./index.js"
   ],
   "license": "MIT"
 }
