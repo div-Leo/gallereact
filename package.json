@@ -33,9 +33,7 @@
     "slideshow"
   ],
   "files": [
-    "build/",
-    "!README.md",
-    "!LICENSE"
+    "build/"
   ],
   "license": "MIT",
   "devDependencies": {
