@@ -18,7 +18,7 @@ const Arrows = () => {
     swipe=false,
     images,
     index,
-    loop=!props.swipe,
+    loop=true,
   } = useContext(GallereactConsumer)
 
   return !swipe && ( 
