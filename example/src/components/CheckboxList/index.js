@@ -1,26 +1,23 @@
 import React from 'react';
 
-import { Checkbox } from 'antd';
-import 'antd/dist/antd.css';
+import './style.sass';
 
 export default ({setCheckboxOpts, checkboxOpts}) => {
 
-  const handleCheckbox = e => {
-    const { value, checked } = e.target;
-    setCheckboxOpts(checkboxOpts => ({...checkboxOpts, [value]: checked}))
+  const handleCheckbox = prop => {
+    console.log('value', prop);
+    setCheckboxOpts(checkboxOpts => ({...checkboxOpts, [prop]: !checkboxOpts[prop]}))
   }
 
   return (
   <div className="checks">
     {Object.entries(checkboxOpts).map(([ sliderOpt, enable ]) =>
-      <Checkbox 
+      <div 
         key={sliderOpt}
-        className="checkbox"
-        onChange={handleCheckbox}
-        checked={enable}
-        value={sliderOpt}>
-          {sliderOpt[0].toUpperCase() + sliderOpt.slice(1)}
-      </Checkbox>
+        className={`checkbox${enable === true ? '--active' : ''}`} 
+        onClick={()=>handleCheckbox(sliderOpt)}>
+        {sliderOpt[0].toUpperCase() + sliderOpt.slice(1)}
+      </div>
     )}
   </div>
 );
