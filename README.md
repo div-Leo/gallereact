@@ -81,7 +81,7 @@ const MyComponent = () => {
 
 ## Contributing
 
-To contribue please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/LICENSE) 
+To contribue please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/CONTRIBUTING.md) 
 
 ## Contributors
 
