@@ -1,8 +1,6 @@
 # Gallereact - React slider
 
-> Custom image slider
-
-Gallereact is a complete ready to use gallery slider, with lot of possible customizations. It works based on background images, which allows a better ration managing.  Just styling a div that contains the component with a height and a width the images will fit on that.
+Gallereact is a complete ready to use gallery slider, with lot of possible customizations. It works based on background images, which allows a better ration managing. Just styling a div that contains the component with a height and a width the images will fit on that.
 
 ## Getting started
 

@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.sass';
 
+const Navbar = () => {
+  const [close, setClose] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', resizeHeaderOnScroll);
+    return () => window.removeEventListener('scroll');
+  }, []);
 
-export default () => (
-  <div className="navbar">
-    <div className="title">GALLEREACT</div>
-    <div className="payoff">Most custom slider ever</div>
-  </div>
-);
+  const resizeHeaderOnScroll = () => {
+    const distanceY = window.pageYOffset || document.documentElement.scrollTop;
+    if (distanceY < 80) setClose(false);
+    else if (!close) setClose(true);
+  };
+
+  return (
+    <div className={`navbar ${close ? 'navbar--close' : ''}`}>
+      <div className="navbar_title">GALLEREACT</div>
+      <div className="navbar_payoff">Background image slider</div>
+    </div>
+  );
+};
+
+export default Navbar;

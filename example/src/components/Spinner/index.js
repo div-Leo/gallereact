@@ -1,8 +1,7 @@
 import React from 'react';
 import './style.sass';
 
-
-export default () => (
+const Spinner = () => (
   <div className="spinner">
     <div className="rect1"></div>
     <div className="rect2"></div>
@@ -11,3 +10,5 @@ export default () => (
     <div className="rect5"></div>
   </div>
 );
+
+export default Spinner;

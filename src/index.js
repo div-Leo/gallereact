@@ -1,1 +1,1 @@
-export { default } from './Gallereact'
+export { default } from './Gallereact';

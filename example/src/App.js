@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Gallereact from 'gallereact-dev';
 
-import { filterImages, unsplashPhotos } from "./utils";
+import { filterImages, unsplashPhotos } from './utils';
 import {
   CheckboxList,
   CodeBlock,
@@ -14,12 +14,12 @@ import {
 import './App.sass';
 
 const defaultCheckboxes = {
-  swipe: false, 
+  swipe: false,
   cover: true,
-  arrowOnHover: false, 
-  transition: true, 
-  loop: true, 
-  autoPlay: false, 
+  arrowOnHover: false,
+  transition: true,
+  loop: true,
+  autoPlay: false,
   titles: true,
   captions: false,
   displayDot: true,
@@ -30,7 +30,7 @@ const defaultColors = {
   primaryColor: '#CCCCCC',
   secondaryColor: '#333333',
 };
-  
+
 const defaultStyle = {
   containerStyle: '',
   slideStyle: {
@@ -54,48 +54,48 @@ const defaultStyle = {
     borderRadius: 0,
     margin: '0px',
   },
-  arrowStyle:''
-}
+  arrowStyle: '',
+};
 
 const App = () => {
-  const [images, setImages] = useState([])
-  const [checkboxOpts, setCheckboxOpts] = useState(defaultCheckboxes)
-  const [colors, setColors] = useState(defaultColors)
-  const [style, setStyle ] = useState(defaultStyle)
+  const [images, setImages] = useState([]);
+  const [checkboxOpts, setCheckboxOpts] = useState(defaultCheckboxes);
+  const [colors, setColors] = useState(defaultColors);
+  const [style, setStyle] = useState(defaultStyle);
 
   useEffect(() => {
-    setCheckboxOpts(checkboxOpts => ({...checkboxOpts, swipe:true}))
-    unsplashPhotos('sea')
-      .then(images => images && setImages(images));
+    setCheckboxOpts(checkboxOpts => ({ ...checkboxOpts, swipe: true }));
+    unsplashPhotos('sea').then(images => images && setImages(images));
   }, []);
 
-  const { titles, captions }  = checkboxOpts;
+  const { titles, captions } = checkboxOpts;
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="slider_container">
-        { images.length ?
+        {images.length ? (
           <Gallereact
             images={filterImages(images, titles, captions)}
             {...style}
             {...colors}
             {...checkboxOpts}
-          /> 
-          : <Spinner/>}
+          />
+        ) : (
+          <Spinner />
+        )}
       </div>
       <div className="settings_container">
         <h1>Booleans</h1>
-        <CheckboxList {...{checkboxOpts, setCheckboxOpts}} />
+        <CheckboxList {...{ checkboxOpts, setCheckboxOpts }} />
         <h1>Colors</h1>
-        <ColorPicker {...{colors, setColors}} />
+        <ColorPicker {...{ colors, setColors }} />
         <h1>Styles</h1>
-        <CodeEditorList {...{style, setStyle}}/>
+        <CodeEditorList {...{ style, setStyle }} />
         <h1>Output code</h1>
-        <CodeBlock {...{ defaultCheckboxes, style, checkboxOpts, colors}} />
+        <CodeBlock {...{ defaultCheckboxes, defaultColors, style, checkboxOpts, colors }} />
       </div>
     </>
   );
-}
-
+};
 
 export default App;

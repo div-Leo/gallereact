@@ -1,33 +1,34 @@
-.spinner
-  margin: 200px auto
-  width: 60px
-  height: 30px
+.navbar
+  position: fixed
+  width: 100%
+  background: white
+  z-index: 100
+  box-shadow: 0 2px 15px -1px #0002
+  top: 0
+  transition: all .3s ease
+  padding: 10px
+  &--close
+    .navbar_title
+      margin-top: 0
+      font-size: 1.7em
+    .navbar_payoff
+      font-size: .65em
+
+.navbar_title
+  font-family: bebas-neue-by-fontfabric, sans-serif
+  font-weight: 400
+  font-style: normal
+  font-size: 2.5em
+  letter-spacing: 2px
   text-align: center
-  font-size: 10px
-  & > div
-    background: #555
-    height: 100%
-    width: 6px
-    display: inline-block
-    margin: 3px
-    animation: sk-stretchdelay 1.2s infinite ease-in-out
+  margin: 5px 0 0 0
+  color: #333
+  transition: all .3s ease
 
-  .rect2
-    animation-delay: -1.1s
-
-  .rect3 
-    animation-delay: -1.0s
-
-  .rect4
-    animation-delay: -0.9s
-
-  .rect5
-    animation-delay: -0.8s
-
-@keyframes sk-stretchdelay
-  0%, 
-  40%, 
-  100%
-    transform: scaleY(0.4)
-  20%
-    transform: scaleY(1.0)
+.navbar_payoff
+  font-size: .9em
+  text-align: center
+  font-weight: 600
+  font-style: normal
+  color: #333
+  transition: all .3s ease

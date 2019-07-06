@@ -18,7 +18,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app", "plugin:react/recommended", "plugin:prettier/recommended"]
   },
   "browserslist": {
     "production": [

@@ -1,6 +1,6 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-const GallereactContext = createContext({})
+const GallereactContext = createContext({});
 
-export const GallereactProvider = GallereactContext.Provider
-export default GallereactContext
+export const GallereactProvider = GallereactContext.Provider;
+export default GallereactContext;
