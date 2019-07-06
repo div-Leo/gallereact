@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Leon31/gallereact/issues"
   },
-  "homepage": "http://gallereact.surge.sh",
+  "homepage": "https://gallereact.netlify.com/",
   "keywords": [
     "carousel",
     "gallery",
