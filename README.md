@@ -1,5 +1,7 @@
 # Gallereact - React slider
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) [![license](https://img.shields.io/github/license/marcoantonioghiani01/create-koa-application.svg)](https://github.com/marcoantonioghiani01/create-koa-application/blob/master/LICENSE)[![Issues](http://img.shields.io/github/issues/Leon31/gallereact.svg)](https://github.com/Leon31/gallereact/issues )[![Coverage Status](https://coveralls.io/repos/github/Leon31/gallereact/badge.svg?branch=master)](https://coveralls.io/github/Leon31/gallereact?branch=master)
+
 Gallereact is a complete ready to use gallery slider, with lot of possible customizations. It works based on background images, which allows a better ration managing. Just styling a div that contains the component with a height and a width the images will fit on that.
 
 ## Getting started
@@ -9,6 +11,8 @@ npm install gallereact
 ```
 
 ### Example
+
+Check out the [live demo here](https://gallereact.netlify.com/)
 
 ```jsx
 import Gallereact from 'gallereact';
