@@ -38,18 +38,24 @@
     "build/"
   ],
   "license": "MIT",
+  "peerDependencies":{
+    "styled-components": "^4.3.2",
+    "react": "^16.8.6"
+  },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",
+    "eslint-plugin-flowtype": "^3.11.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react-hooks": "^1.6.1",
     "styled-components": "^4.3.2",
     "husky": "^3.0.0",
@@ -59,9 +65,5 @@
     "prettier": "^1.18.2",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.4"
-  },
-  "dependencies": {
-    "babel-eslint": "^10.0.2",
-    "eslint-plugin-flowtype": "^3.11.1"
   }
 }
