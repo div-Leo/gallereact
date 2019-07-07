@@ -13,8 +13,8 @@ const useSwipeAction = (index, sliderWidth, goToSlide) => {
     document.addEventListener('mouseup', reset, false);
     document.addEventListener('touchend', reset, false);
     return () => {
-      document.removeEventListener('mouseup');
-      document.removeEventListener('touchend');
+      document.removeEventListener('mouseup', reset);
+      document.removeEventListener('touchend', reset);
     };
   }, []);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as s from '../style.js';
+import { S_Arrow, S_ArrowIcon } from '../style.js';
 
 const Arrow = ({
   callToAction,
@@ -13,18 +13,18 @@ const Arrow = ({
   primaryColor,
 }) => {
   return (
-    <s.Arrow direction={direction} hover={arrowOnHover} onClick={callToAction}>
+    <S_Arrow direction={direction} hover={arrowOnHover} onClick={callToAction}>
       {arrowImg ? (
         <img src={arrowImg} style={arrowStyle} alt="" />
       ) : (
-        <s.ArrowIcon
+        <S_ArrowIcon
           displayArrows={displayArrows}
           direction={direction}
           style={arrowStyle}
           primaryColor={primaryColor}
-        ></s.ArrowIcon>
+        ></S_ArrowIcon>
       )}
-    </s.Arrow>
+    </S_Arrow>
   );
 };
 

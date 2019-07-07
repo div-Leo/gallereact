@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import GallereactConsumer from '../GallereactContext';
 
-import * as s from '../style.js';
+import { S_DotsContainer, S_Dot } from '../style.js';
 
 const Dots = () => {
   const {
@@ -19,9 +19,9 @@ const Dots = () => {
   };
 
   return (
-    <s.DotsContainer displayDot={displayDot}>
+    <S_DotsContainer displayDot={displayDot}>
       {images.map((_, id) => (
-        <s.Dot
+        <S_Dot
           key={id}
           style={dotStyle}
           active={id === index}
@@ -29,7 +29,7 @@ const Dots = () => {
           onClick={handleDotClick.bind(null, id)}
         />
       ))}
-    </s.DotsContainer>
+    </S_DotsContainer>
   );
 };
 

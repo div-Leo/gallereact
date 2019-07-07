@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as s from '../style.js';
+import { S_Tagline, S_Title, S_Caption } from '../style.js';
 
 function Tagline({ curr, taglineStyle, titleStyle, captionStyle }) {
   return curr.title || curr.caption ? (
-    <s.Tagline style={taglineStyle}>
-      <s.Title style={titleStyle}>{curr.title}</s.Title>
-      <s.Caption style={captionStyle}>{curr.caption}</s.Caption>
-    </s.Tagline>
+    <S_Tagline style={taglineStyle}>
+      <S_Title style={titleStyle}>{curr.title}</S_Title>
+      <S_Caption style={captionStyle}>{curr.caption}</S_Caption>
+    </S_Tagline>
   ) : null;
 }
 Tagline.propTypes = {

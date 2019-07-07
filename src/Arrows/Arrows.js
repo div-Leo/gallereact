@@ -3,7 +3,7 @@ import GallereactConsumer from '../GallereactContext';
 
 import Arrow from './Arrow';
 
-import * as s from '../style.js';
+import { S_Arrows } from '../style.js';
 
 const Arrows = () => {
   const {
@@ -23,7 +23,7 @@ const Arrows = () => {
 
   return (
     !swipe && (
-      <s.Arrows>
+      <S_Arrows>
         {loop || index > 0 ? (
           <Arrow
             {...{
@@ -54,7 +54,7 @@ const Arrows = () => {
         ) : (
           <div />
         )}
-      </s.Arrows>
+      </S_Arrows>
     )
   );
 };

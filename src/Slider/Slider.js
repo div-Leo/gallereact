@@ -5,7 +5,7 @@ import useSwipeAction from './useSwipeAction';
 
 import Tagline from '../Tagline';
 
-import * as s from '../style.js';
+import { S_Slide, S_Slider } from '../style.js';
 
 const Slider = () => {
   const {
@@ -26,13 +26,13 @@ const Slider = () => {
   const { listeners, translateState } = useSwipeAction(index, sliderWidth, goToSlide);
 
   const renderSlides = images.map((curr, i) => (
-    <s.Slide key={i} style={slideStyle} cover={cover} image={curr.image}>
+    <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image}>
       <Tagline {...{ curr, taglineStyle, titleStyle, captionStyle }} />
-    </s.Slide>
+    </S_Slide>
   ));
 
   return (
-    <s.Slider
+    <S_Slider
       {...listeners}
       sliderWidth={sliderWidth}
       transition={swipe || transition}
@@ -41,7 +41,7 @@ const Slider = () => {
       ref={slider}
     >
       {renderSlides}
-    </s.Slider>
+    </S_Slider>
   );
 };
 

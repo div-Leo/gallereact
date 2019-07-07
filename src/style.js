@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const S_Container = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-export const Gallery = styled.div`
+export const S_Gallery = styled.div`
   height: 90%;
   overflow: hidden;
   margin: 0 auto;
   white-space: nowrap;
 `;
 
-export const Slider = styled.div`
+export const S_Slider = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -23,7 +23,7 @@ export const Slider = styled.div`
     transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDuration * 0.5}s` : 'none'};
 `;
 
-export const Slide = styled.div`
+export const S_Slide = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -34,7 +34,7 @@ export const Slide = styled.div`
   background-size: ${({ cover }) => (cover ? 'cover' : 'contain')};
 `;
 
-export const Tagline = styled.div`
+export const S_Tagline = styled.div`
   background: #fffa;
   color: #333;
   text-align: center;
@@ -46,7 +46,7 @@ export const Tagline = styled.div`
   transform: translate(-50%, 0);
 `;
 
-export const Title = styled.div`
+export const S_Title = styled.div`
   margin: 10px;
   margin-bottom: 5px;
   font-weight: 600;
@@ -55,12 +55,12 @@ export const Title = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const Caption = styled.p`
+export const S_Caption = styled.p`
   width: 100%;
   white-space: normal;
 `;
 
-export const Arrows = styled.div`
+export const S_Arrows = styled.div`
   position: relative;
   z-index: 5;
   width: 100%;
@@ -72,7 +72,7 @@ export const Arrows = styled.div`
   user-select: none;
 `;
 
-export const Arrow = styled.div`
+export const S_Arrow = styled.div`
   width: 40%;
   height: 100%;
   cursor: pointer;
@@ -90,21 +90,21 @@ export const Arrow = styled.div`
   }
 `;
 
-export const ArrowL = styled(Arrow)`
+export const S_ArrowL = styled(Arrow)`
   justify-content: flex-start;
   img {
     opacity: ${({ hover }) => (hover ? '0' : '1')};
   }
 `;
 
-export const ArrowR = styled(Arrow)`
+export const S_ArrowR = styled(Arrow)`
   justify-content: flex-end;
   img {
     opacity: ${({ hover }) => (hover ? '0' : '1')};
   }
 `;
 
-export const ArrowIcon = styled.div`
+export const S_ArrowIcon = styled.div`
   border: solid ${({ primaryColor }) => primaryColor};
   border-width: 0 4px 4px 0;
   display: ${({ displayArrows }) => (displayArrows ? 'flex' : 'none')};
@@ -113,7 +113,7 @@ export const ArrowIcon = styled.div`
   transform: rotate(${({ direction }) => (direction === 'left' ? '135deg' : '-45deg')});
 `;
 
-export const DotsContainer = styled.div`
+export const S_DotsContainer = styled.div`
   position: relative;
   bottom: 0;
   width: 100%;
@@ -126,7 +126,7 @@ export const DotsContainer = styled.div`
   transform: translate(0, -0%);
 `;
 
-export const Dot = styled.div`
+export const S_Dot = styled.div`
   background: ${({ active, colors }) => (active ? colors.b : colors.a)};
   display: inline-block;
   width: 10px;

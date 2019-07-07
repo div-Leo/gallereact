@@ -6,7 +6,7 @@ import Slider from './Slider';
 import Arrows from './Arrows';
 import Dots from './Dots';
 
-import * as s from './style.js';
+import { S_Container, S_Gallery } from './style.js';
 
 const Gallereact = props => {
   const {
@@ -57,13 +57,13 @@ const Gallereact = props => {
 
   return (
     <GallereactProvider value={{ index, ...props, goToPreviousSlide, goToNextSlide, goToSlide }}>
-      <s.Container>
-        <s.Gallery cover={cover} style={containerStyle}>
+      <S_Container>
+        <S_Gallery cover={cover} style={containerStyle}>
           <Slider />
           <Arrows />
-        </s.Gallery>
+        </S_Gallery>
         <Dots />
-      </s.Container>
+      </S_Container>
     </GallereactProvider>
   );
 };
