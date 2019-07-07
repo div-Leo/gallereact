@@ -32,7 +32,7 @@ const defaultColors = {
 };
 
 const defaultStyle = {
-  containerStyle: '',
+  containerStyle: {},
   slideStyle: {
     width: '80%',
     height: '90%',
@@ -47,14 +47,14 @@ const defaultStyle = {
     fontWeight: 800,
     fontSize: '1.2rem',
   },
-  captionStyle: '',
+  captionStyle: {},
   dotStyle: {
     width: '25px',
     height: '3px',
     borderRadius: 0,
     margin: '0px',
   },
-  arrowStyle: '',
+  arrowStyle: {},
 };
 
 const App = () => {

@@ -41,7 +41,7 @@ const parseCode = code => {
 };
 
 const sringifyCode = defaultCode => {
-  if (!defaultCode) return `{ /* insert your style here */ }`;
+  if (!Object.entries(defaultCode).length) return `{ /* insert your style here */ }`;
   return JSON.stringify(defaultCode)
     .replace(/"([^(")"]+)":/g, '\n  $1:') // delete keys double quotes
     .replace('}', '\n}'); // after last property insert new line
@@ -49,7 +49,7 @@ const sringifyCode = defaultCode => {
 
 CodeEditor.propTypes = {
   setStyle: PropTypes.func.isRequired,
-  defaultCode: PropTypes.objectOf(PropTypes.any).isRequired,
+  defaultCode: PropTypes.object,
   name: PropTypes.string.isRequired,
 };
 

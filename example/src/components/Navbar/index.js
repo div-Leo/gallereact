@@ -5,7 +5,7 @@ const Navbar = () => {
   const [close, setClose] = useState(false);
   useEffect(() => {
     window.addEventListener('scroll', resizeHeaderOnScroll);
-    return () => window.removeEventListener('scroll');
+    return () => window.removeEventListener('scroll', resizeHeaderOnScroll);
   }, []);
 
   const resizeHeaderOnScroll = () => {
