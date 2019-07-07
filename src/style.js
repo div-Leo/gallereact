@@ -90,20 +90,6 @@ export const S_Arrow = styled.div`
   }
 `;
 
-export const S_ArrowL = styled(Arrow)`
-  justify-content: flex-start;
-  img {
-    opacity: ${({ hover }) => (hover ? '0' : '1')};
-  }
-`;
-
-export const S_ArrowR = styled(Arrow)`
-  justify-content: flex-end;
-  img {
-    opacity: ${({ hover }) => (hover ? '0' : '1')};
-  }
-`;
-
 export const S_ArrowIcon = styled.div`
   border: solid ${({ primaryColor }) => primaryColor};
   border-width: 0 4px 4px 0;
