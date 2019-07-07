@@ -1,6 +1,6 @@
 {
   "name": "gallereact",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "React customizable gallery slider.",
   "main": "./build/index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "build/"
   ],
   "license": "MIT",
-  "peerDependencies":{
+  "peerDependencies": {
     "styled-components": "^4.3.2",
     "react": "^16.8.6"
   },
