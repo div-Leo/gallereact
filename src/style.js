@@ -20,7 +20,7 @@ export const S_Slider = styled.div`
     ${({ sliderWidth, index, translateDrag = 0 }) => `${-(index * sliderWidth) + translateDrag}px`}
   );
   transition: ${({ transition, translateDuration = 0.5 }) =>
-    transition ? `transform cubic-bezier(1, 1.40, .70, .80) ${translateDuration * 0.5}s` : 'none'};
+    transition ? `transform cubic-bezier(0,.59,.46,1) ${translateDuration * 0.7}s` : 'none'};
 `;
 
 export const S_Slide = styled.div`
