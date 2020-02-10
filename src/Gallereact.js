@@ -76,8 +76,8 @@ Gallereact.propTypes = {
   autoPlay: PropTypes.bool.isRequired,
   callback: PropTypes.func.isRequired,
   inputIndex: PropTypes.number.isRequired,
-  containerStyle: PropTypes.objectOf(PropTypes.object).isRequire,
-  images: PropTypes.arrayOf(PropTypes.object).isRequire,
+  containerStyle: PropTypes.object,
+  images: PropTypes.array,
 };
 
 export default Gallereact;
