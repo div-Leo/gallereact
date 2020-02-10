@@ -85,6 +85,7 @@ export const S_Arrow = styled.div`
     transform: translate(0, -50%);
     transition: opacity 0.4s;
   }
+  transition: opacity 0.3s ease;
   &:hover {
     opacity: 1;
   }
