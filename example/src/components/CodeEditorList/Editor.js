@@ -18,6 +18,13 @@ const CodeEditor = ({ defaultCode, setStyle, name }) => {
     } catch (e) {}
   }, [code]);
 
+  useEffect(() => {
+    try {
+      const stringifyedCode = sringifyCode(defaultCode);
+      setCode(stringifyedCode || '');
+    } catch (e) {}
+  }, [defaultCode]);
+
   return (
     <div className="editor_container">
       <h3 htmlFor="containerStyle">{name[0].toUpperCase() + name.slice(1).replace('Style', '')}</h3>
