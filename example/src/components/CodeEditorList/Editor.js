@@ -27,7 +27,7 @@ const CodeEditor = ({ defaultCode, setStyle, name }) => {
 
   return (
     <div className="editor_container">
-      <h3 htmlFor="containerStyle">{name[0].toUpperCase() + name.slice(1).replace('Style', '')}</h3>
+      <h3 htmlFor="containerStyle">{fromatTitle(name)}</h3>
       <Editor
         value={code}
         onValueChange={setCode}
@@ -37,6 +37,12 @@ const CodeEditor = ({ defaultCode, setStyle, name }) => {
       />
     </div>
   );
+};
+
+const fromatTitle = name => {
+  let title = name[0].toUpperCase() + name.slice(1).replace('Style', '');
+  if (title === 'Outer') title += ' (your external container)';
+  return title;
 };
 
 const parseCode = code => {

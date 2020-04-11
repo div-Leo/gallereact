@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Gallereact from 'gallereact';
+import Gallereact from 'gallereact-dev';
 
 import { filterImages, unsplashPhotos, options } from './utils';
 import {
@@ -55,7 +55,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div className="slider_container" style={style.mainStyle}>
+      <div className="slider_container" style={style.outerStyle}>
         {images.length ? (
           <Gallereact
             images={filterImages(images, titles, captions)}

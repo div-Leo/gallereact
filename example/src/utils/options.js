@@ -3,7 +3,7 @@ const options = [
   {
     checkboxes: {},
     defaultStyle: {
-      mainStyle: {
+      outerStyle: {
         height: '95vh',
         width: '70vw',
       },
@@ -25,7 +25,7 @@ const options = [
       titles: true,
     },
     defaultStyle: {
-      mainStyle: {
+      outerStyle: {
         height: '95vh',
         width: '70vw',
       },
@@ -64,7 +64,7 @@ const options = [
       transition: false,
     },
     defaultStyle: {
-      mainStyle: {
+      outerStyle: {
         height: '95vh',
         width: '70vw',
       },

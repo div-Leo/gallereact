@@ -19,6 +19,7 @@ const CodeBlock = ({ defaultCheckboxes, defaultColors, style, checkboxOpts, colo
   );
 
   const stylesOptions = Object.entries(style).reduce((acc, [className, options]) => {
+    if (className === 'outerStyle') return acc;
     if (Object.keys(options).length) {
       acc += `\n  ${className}={${JSON.stringify(options).replace(/"([^(")"]+)":/g, '$1:')}} `;
     }

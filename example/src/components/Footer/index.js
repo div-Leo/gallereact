@@ -10,18 +10,10 @@ const socials = [
   ['https://www.npmjs.com/package/gallereact', FaNpm],
 ];
 
-// const A = ({ children, href }) => {
-//   return (
-//     <a rel="noopener noreferrer" href={href} target="_blank">
-//       {children}
-//     </a>
-//   );
-// };
-
 const Footer = () => (
   <>
     <div className="power_container">
-      Power with{' '}
+      Made with{' '}
       <span role="img" aria-label="love">
         ❤️
       </span>
@@ -39,10 +31,5 @@ const Footer = () => (
     </div>
   </>
 );
-
-// A.propTypes = {
-//   setCheckboxOpts: PropTypes.func.isRequired,
-//   checkboxOpts: PropTypes.objectOf(PropTypes.any).isRequired,
-// };
 
 export default Footer;
