@@ -3,13 +3,15 @@ import styled from 'styled-components';
 export const S_Container = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const S_Gallery = styled.div`
-  height: 90%;
   overflow: hidden;
-  margin: 0 auto;
   white-space: nowrap;
+  flex: 9;
+  width: 100%;
 `;
 
 export const S_Slider = styled.div`
@@ -101,7 +103,7 @@ export const S_ArrowIcon = styled.div`
 `;
 
 export const S_DotsContainer = styled.div`
-  position: relative;
+  flex: 1;
   bottom: 0;
   width: 100%;
   height: 10%;
@@ -109,7 +111,6 @@ export const S_DotsContainer = styled.div`
   display: ${({ displayDot }) => (displayDot ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
-  z-index: 10;
   transform: translate(0, -0%);
 `;
 
@@ -121,4 +122,33 @@ export const S_Dot = styled.div`
   margin: 0 10px;
   cursor: pointer;
   border-radius: 50%;
+`;
+
+export const S_PreviewContainer = styled.div`
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  margin: auto;
+  display: ${({ displayPreview }) => (displayPreview ? 'flex' : 'none')};
+  align-items: center;
+  z-index: 10;
+  transform: translate(0, -0%);
+  overflow: hidden;
+  overflow-x: scroll;
+`;
+
+export const S_Preview = styled.div`
+  background-image: url(${({ image }) => image});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+  width: ${({ length }) => `${100 / length}%`};
+  min-width: ${() => `${100 / 10}%`};
+  height: 100%;
+  margin: 0px;
+  cursor: pointer;
+  border: ${({ active, color }) => (active ? `solid 3px ${color}` : `solid 0px ${color}`)};
+  transition: border 0.5s;
 `;

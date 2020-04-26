@@ -5,6 +5,7 @@ import { GallereactProvider } from './GallereactContext';
 import Slider from './Slider';
 import Arrows from './Arrows';
 import Dots from './Dots';
+import Preview from './Preview';
 
 import { S_Container, S_Gallery } from './style.js';
 
@@ -19,6 +20,7 @@ const Gallereact = props => {
     inputIndex,
     images = [],
     swipe = false,
+    preview = false,
   } = props;
 
   const [index, setIndex] = useState(0);
@@ -62,7 +64,7 @@ const Gallereact = props => {
           <Slider />
           <Arrows />
         </S_Gallery>
-        <Dots />
+        {preview ? <Preview /> : <Dots />}
       </S_Container>
     </GallereactProvider>
   );
@@ -74,6 +76,7 @@ Gallereact.propTypes = {
   duration: PropTypes.bool.isRequired,
   swipe: PropTypes.bool.isRequired,
   autoPlay: PropTypes.bool.isRequired,
+  preview: PropTypes.bool.isRequired,
   callback: PropTypes.func.isRequired,
   inputIndex: PropTypes.number.isRequired,
   containerStyle: PropTypes.object,
