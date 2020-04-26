@@ -9,21 +9,25 @@ const Dots = () => {
     images,
     goToSlide,
     dotStyle,
+    dotActiveStyle,
     displayDot = true,
     primaryColor = '#CCC',
     secondaryColor = '#333',
+    dotsContainerStyle,
   } = useContext(GallereactConsumer);
 
   const handleDotClick = i => {
     i === index || goToSlide(i);
   };
 
+  const activeStyle = Object.assign({}, dotActiveStyle, dotStyle);
+
   return (
-    <S_DotsContainer displayDot={displayDot}>
+    <S_DotsContainer displayDot={displayDot} style={dotsContainerStyle}>
       {images.map((_, id) => (
         <S_Dot
           key={id}
-          style={dotStyle}
+          style={id === index ? activeStyle : dotStyle}
           active={id === index}
           colors={{ a: primaryColor, b: secondaryColor }}
           onClick={handleDotClick.bind(null, id)}
