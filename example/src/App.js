@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Gallereact from 'gallereact-dev';
+import Gallereact from 'gallereact';
 
 import { filterImages, filterStyle, unsplashPhotos, options } from './utils';
 import {
