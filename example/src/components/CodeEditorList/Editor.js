@@ -7,7 +7,7 @@ import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-jsx.min';
 
-const CodeEditor = ({ defaultCode, setStyle, name }) => {
+const CodeEditor = ({ initialCode, defaultCode, setStyle, name }) => {
   const stringifyedCode = sringifyCode(defaultCode);
   const [code, setCode] = useState(stringifyedCode || '');
 
@@ -20,10 +20,10 @@ const CodeEditor = ({ defaultCode, setStyle, name }) => {
 
   useEffect(() => {
     try {
-      const stringifyedCode = sringifyCode(defaultCode);
+      const stringifyedCode = sringifyCode(initialCode);
       setCode(stringifyedCode || '');
     } catch (e) {}
-  }, [defaultCode]);
+  }, [initialCode]);
 
   return (
     <div className="editor_container">
@@ -62,6 +62,7 @@ const sringifyCode = defaultCode => {
 
 CodeEditor.propTypes = {
   setStyle: PropTypes.func.isRequired,
+  initialCode: PropTypes.object,
   defaultCode: PropTypes.object,
   name: PropTypes.string.isRequired,
 };

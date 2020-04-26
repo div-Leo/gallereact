@@ -8,7 +8,7 @@ const unsplash = new Unsplash({
 
 const unsplashPhotos = topic =>
   unsplash.search
-    .photos(topic, 2)
+    .photos(topic, Math.random() * 10)
     .then(toJson)
     .then(({ results }) => {
       if (results.length) {

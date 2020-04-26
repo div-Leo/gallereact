@@ -8,7 +8,7 @@ const Options = ({ setOption, option, options }) => {
     <div className="options_container">
       {options.map((opt, i) => (
         <div
-          key={'Option' + opt}
+          key={'Option' + i}
           onClick={() => setOption(i)}
           className={option === i ? 'options--active' : 'options'}
         >

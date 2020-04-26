@@ -26,7 +26,7 @@ const CodeBlock = ({ defaultCheckboxes, defaultColors, style, checkboxOpts, colo
     return acc;
   }, '');
 
-  const codeOutput = `<Slider\n  images={[/* array of images */]} ${galleryOptions}${stylesOptions} \n/>`;
+  const codeOutput = `<Gallereact\n  images={[/* array of images */]} ${galleryOptions}${stylesOptions} \n/>`;
 
   return (
     <div className="codeBlock_title">

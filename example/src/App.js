@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Gallereact from 'gallereact-dev';
 
-import { filterImages, unsplashPhotos, options } from './utils';
+import { filterImages, filterStyle, unsplashPhotos, options } from './utils';
 import {
   CheckboxList,
   CodeBlock,
@@ -24,6 +24,7 @@ const defaultCheckboxes = {
   autoPlay: false,
   titles: false,
   captions: false,
+  preview: false,
   displayDot: true,
   displayArrows: true,
 };
@@ -52,6 +53,7 @@ const App = () => {
   }, [option]);
 
   const { titles, captions } = checkboxOpts;
+
   return (
     <>
       <Navbar />
@@ -59,7 +61,7 @@ const App = () => {
         {images.length ? (
           <Gallereact
             images={filterImages(images, titles, captions)}
-            {...style}
+            {...filterStyle(style)}
             {...colors}
             {...checkboxOpts}
           />
@@ -85,7 +87,7 @@ const App = () => {
         <h1>Colors</h1>
         <ColorPicker {...{ colors, setColors }} />
         <h1>Styles</h1>
-        <CodeEditorList {...{ style, setStyle }} />
+        <CodeEditorList {...{ style, setStyle, defaultStyle }} />
         <h1>Output code</h1>
         <CodeBlock {...{ defaultCheckboxes, defaultColors, style, checkboxOpts, colors }} />
       </div>
