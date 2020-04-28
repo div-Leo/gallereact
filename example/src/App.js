@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Gallereact from 'gallereact';
+import Gallereact from 'gallereact-dev';
 
 import { filterImages, filterStyle, unsplashPhotos, options } from './utils';
 import {
@@ -24,7 +24,7 @@ const defaultCheckboxes = {
   autoPlay: false,
   titles: false,
   captions: false,
-  preview: false,
+  displayPreview: false,
   displayDot: true,
   displayArrows: true,
 };
