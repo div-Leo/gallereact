@@ -10,18 +10,18 @@ const Preview = () => {
     goToSlide,
     previewStyle,
     previewActiveStyle,
-    preview = true,
+    displayPreview = true,
     primaryColor = '#CCC',
   } = useContext(GallereactConsumer);
 
   const handlePreviewClick = i => {
     i === index || goToSlide(i);
   };
-
-  const activeStyle = Object.assign({}, previewActiveStyle, previewStyle);
+  console.log('previewActiveStyle', previewActiveStyle);
+  const activeStyle = Object.assign({}, previewStyle, previewActiveStyle);
 
   return (
-    <S_PreviewContainer displayPreview={preview}>
+    <S_PreviewContainer displayPreview={displayPreview}>
       {images.map((image, id) => (
         <S_Preview
           key={id}

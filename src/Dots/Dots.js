@@ -20,7 +20,7 @@ const Dots = () => {
     i === index || goToSlide(i);
   };
 
-  const activeStyle = Object.assign({}, dotActiveStyle, dotStyle);
+  const activeStyle = Object.assign({}, dotStyle, dotActiveStyle);
 
   return (
     <S_DotsContainer displayDot={displayDot} style={dotsContainerStyle}>
