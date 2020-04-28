@@ -34,7 +34,7 @@ const Slider = () => {
   return (
     <S_Slider
       {...listeners}
-      sliderWidth={sliderWidth}
+      width={sliderWidth}
       transition={swipe || transition}
       index={index}
       {...translateState}
