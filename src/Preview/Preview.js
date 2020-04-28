@@ -17,7 +17,7 @@ const Preview = () => {
   const handlePreviewClick = i => {
     i === index || goToSlide(i);
   };
-  console.log('previewActiveStyle', previewActiveStyle);
+
   const activeStyle = Object.assign({}, previewStyle, previewActiveStyle);
 
   return (

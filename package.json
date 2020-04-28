@@ -1,6 +1,6 @@
 {
   "name": "gallereact",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React customizable gallery slider.",
   "main": "./build/index.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "precommit": "npm run lint",
     "prod-mode": "echo \"`jq '.name=\"gallereact\"' package.json`\" > package.json",
     "dev-mode": "echo \"`jq '.name=\"gallereact-dev\"' package.json`\" > package.json",
-    "publish": "npm run prod-mode",
-    "link": "npm run dev-mode"
+    "publish": "npm run prod-mode && npm publish",
+    "link": "npm run dev-mode && npm link"
   },
   "author": {
     "name": "Leonardo Di Vittorio",
