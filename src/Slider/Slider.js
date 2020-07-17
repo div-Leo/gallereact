@@ -26,7 +26,7 @@ const Slider = () => {
   const { listeners, translateState } = useSwipeAction(index, sliderWidth, goToSlide);
 
   const renderSlides = images.map((curr, i) => (
-    <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image}>
+    <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image || curr}>
       <Tagline {...{ curr, taglineStyle, titleStyle, captionStyle }} />
     </S_Slide>
   ));
