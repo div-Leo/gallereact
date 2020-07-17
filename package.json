@@ -43,8 +43,10 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "styled-components": "^4.3.2",
     "react": "^16.8.6"
+  },
+  "dependencies": {
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
