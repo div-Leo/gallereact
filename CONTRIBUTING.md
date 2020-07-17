@@ -26,9 +26,9 @@ To start the project:
 npm start # to watch the files with webpack
 ```
 
-`./src` folder contains Galleract component. 
+`./src` folder contains Gallereact component. 
 
-Use `npm link` comand in the main folder to use locally the package. Create your `create-react-app` or use the one inside the `/example` folder, inside the folder run `npm link galleract` in order to provide the component to the app.
+Use `npm link` comand in the main folder to use locally the package. Create your `create-react-app` or use the one inside the `/example` folder, inside the folder run `npm link gallereact` in order to provide the component to the app.
 
 Once you are done and you think your code works well, submit a Pull Request.
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Gallereact from 'gallereact-dev';
 
 import { filterImages, filterStyle, unsplashPhotos, options } from './utils';
@@ -54,13 +54,19 @@ const App = () => {
 
   const { titles, captions } = checkboxOpts;
 
+  const filteredImages = useMemo(() => filterImages(images, titles, captions), [
+    images,
+    titles,
+    captions,
+  ]);
+
   return (
     <>
       <Navbar />
       <div className="slider_container" style={style.outerStyle}>
         {images.length ? (
           <Gallereact
-            images={filterImages(images, titles, captions)}
+            images={filteredImages}
             {...filterStyle(style)}
             {...colors}
             {...checkboxOpts}
@@ -69,7 +75,7 @@ const App = () => {
           <Spinner />
         )}
       </div>
-      <div className="descrpition_container">
+      <div className="description_container">
         <h1>Gallereact</h1>
         <p>
           {' '}

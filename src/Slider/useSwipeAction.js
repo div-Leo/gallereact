@@ -22,7 +22,7 @@ const useSwipeAction = (index, sliderWidth, goToSlide) => {
     setTranslateState(initialTranslateState);
   };
 
-  const muve = e => {
+  const move = e => {
     if (translateState.x0) {
       const { clientX } = unify(e);
       const dragX = clientX - translateState.x0;
@@ -59,10 +59,10 @@ const useSwipeAction = (index, sliderWidth, goToSlide) => {
   const listeners = {
     onTouchStart: lock,
     onTouchMove: drag,
-    onTouchEnd: muve,
+    onTouchEnd: move,
     onMouseDown: lock,
     onMouseMove: drag,
-    onMouseUp: muve,
+    onMouseUp: move,
   };
 
   return { listeners, translateState };

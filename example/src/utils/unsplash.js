@@ -1,7 +1,7 @@
 import Unsplash, { toJson } from 'unsplash-js';
 
 const unsplash = new Unsplash({
-  applicationId: process.env.REACT_APP_APPLICATON_ID,
+  applicationId: process.env.REACT_APP_APPLICATION_ID,
   secret: process.env.REACT_APP_SECRET,
   callbackUrl: process.env.REACT_APP_CALLBACK_URL,
 });

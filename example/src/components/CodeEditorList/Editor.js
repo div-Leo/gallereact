@@ -8,8 +8,8 @@ import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-jsx.min';
 
 const CodeEditor = ({ initialCode, defaultCode, setStyle, name }) => {
-  const stringifyedCode = sringifyCode(defaultCode);
-  const [code, setCode] = useState(stringifyedCode || '');
+  const stringifiedCode = stringifyCode(defaultCode);
+  const [code, setCode] = useState(stringifiedCode || '');
 
   useEffect(() => {
     try {
@@ -20,8 +20,8 @@ const CodeEditor = ({ initialCode, defaultCode, setStyle, name }) => {
 
   useEffect(() => {
     try {
-      const stringifyedCode = sringifyCode(initialCode);
-      setCode(stringifyedCode || '');
+      const stringifiedCode = stringifyCode(initialCode);
+      setCode(stringifiedCode || '');
     } catch (e) {}
   }, [initialCode]);
 
@@ -48,12 +48,12 @@ const fromatTitle = name => {
 const parseCode = code => {
   const formattedCode = code
     .replace(/([^{\n ]+):/g, '"$1":') // wrap keys with double quotes
-    .replace(/([\n]+)/g, '') // trimm new line characters
+    .replace(/([\n]+)/g, '') // trim new line characters
     .replace(/(\/\*.+\*\/)/g, ''); // delete comments
   return JSON.parse(formattedCode);
 };
 
-const sringifyCode = defaultCode => {
+const stringifyCode = defaultCode => {
   if (!Object.entries(defaultCode).length) return `{ /* insert your style here */ }`;
   return JSON.stringify(defaultCode)
     .replace(/"([^(")"]+)":/g, '\n  $1:') // delete keys double quotes

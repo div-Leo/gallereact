@@ -2,7 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg?style=flat)](http://makeapullrequest.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gallereact.svg) [![Issues](http://img.shields.io/github/issues/Leon31/gallereact.svg)](https://github.com/Leon31/gallereact/issues ) [![license](https://img.shields.io/github/license/leon31/gallereact.svg)](https://github.com/Leon31/gallereact/blob/master/LICENSE) [![Coverage Status](https://coveralls.io/repos/github/Leon31/gallereact/badge.svg?branch=master)](https://coveralls.io/github/Leon31/gallereact?branch=master)
 
-Gallereact is a complete ready to use gallery slider, with a lot of possible customizations. It works based on background images, which allows a better ratio managment. Just styling the div that contains the component with a height and a width and the images will fit on that.
+Gallereact is a complete ready to use gallery slider, with a lot of possible customizations. It works based on background images, which allows a better ratio management. Just styling the div that contains the component with a height and a width and the images will fit on that.
 
 ## Getting started
 
@@ -21,21 +21,15 @@ Import the component `Gallereact` from the library and put it inside a **contain
 ```jsx
 import Gallereact from 'gallereact';
 
-const MyComponent = () => {
+function MyComponent () {
   const images = [
-    {image: 'http://image.url/1'},
-    {image: 'http://image.url/2'}
+    'http://image.url/1', 
+    'http://image.url/2', 
+    'http://image.url/3'
   ];
-  
-  const style = {
-    container: {
-      width: '60vw',
-      height: '80vh'
-    }
-  }
                   
   return (
-    <div style={style.container}>
+    <div style={{ width: '60vw', height: '80vh' }}>
       <Gallereact images={images} />
     </div>
   )
@@ -52,8 +46,8 @@ const MyComponent = () => {
 | `autoPlay`           |  Boolean   |  false  |  false   |                       Slider auto play                       |
 | `duration`           |   Number   |  5000   |  false   |      When auto play determines the transition duration       |
 | `transition`         |  Boolean   |  true   |  false   |         Allow animated transition on slide change .          |
-| `loop`               |  Boolean   |  true   |  false   | If true, onced reached the end it will re-start from the beginnign. Ignored if `swipe` is true. |
-| `cover`              |  Boolean   |  true   |  false   | Bakcground-Image style. If false the applyed style is "*contain*". |
+| `loop`               |  Boolean   |  true   |  false   | If true, once reached the end it will re-start from the beginnign. Ignored if `swipe` is true. |
+| `cover`              |  Boolean   |  true   |  false   | Background-Image style. If false the applied style is "*contain*". |
 | `swipe`              |  Boolean   |  false  |  false   |                     Allow Swipe action.                      |
 | `arrowOnHover`       |  Boolean   |  false  |  false   |                     Show arrow on hover.                     |
 | `displayDot`         |  Boolean   |  true   |  false   | Show dots. If false slider will take the entire available height. |
@@ -77,8 +71,6 @@ const MyComponent = () => {
 | `callback`           |  Function  |    -    |  false   |       Callback function on slide change  *@param {i}*        |
 | `images`             |  Image[]!  |    -    |   true   |               Array of objects of type Image.                |
 
-
-
 ### Image 
 
 | Prop name |  Type   | Default | Required |     Description      |
@@ -87,6 +79,7 @@ const MyComponent = () => {
 | `title`   | String  |    -    |  false   |  Title of the image  |
 | `caption` | String  |    -    |  false   | Caption of the image |
 
+If you don't have any tagline you can pass just the url of the images.
 
 
 ## Other examples
@@ -144,7 +137,7 @@ return (
 
 #### Go to slide
 
-You can control the slider passing the property `inputIndex`  which will translate to the tagerted slider.
+You can control the slider passing the property `inputIndex`  which will translate to the targeted slider.
 
 ```jsx
 const [index, setIndex] = useState(0)
@@ -168,7 +161,7 @@ return (
 
 ## Contributing
 
-To contribue please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/CONTRIBUTING.md) 
+To contribute please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/CONTRIBUTING.md) 
 
 ## Contributors
 
