@@ -18,4 +18,4 @@ Tagline.propTypes = {
   captionStyle: PropTypes.object.isRequired,
 };
 
-export default Tagline;
+export default React.memo(Tagline);
