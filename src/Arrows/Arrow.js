@@ -7,13 +7,19 @@ const Arrow = ({
   callToAction,
   direction,
   arrowStyle,
+  arrowAreaStyle,
   displayArrows,
   arrowOnHover,
   arrowImg,
   primaryColor,
 }) => {
   return (
-    <S_Arrow direction={direction} hover={arrowOnHover} onClick={callToAction}>
+    <S_Arrow
+      style={arrowAreaStyle}
+      direction={direction}
+      hover={arrowOnHover}
+      onClick={callToAction}
+    >
       {arrowImg ? (
         <img src={arrowImg} style={arrowStyle} alt="" />
       ) : (
@@ -32,10 +38,11 @@ Arrow.propTypes = {
   callToAction: PropTypes.func.isRequired,
   direction: PropTypes.string.isRequired,
   arrowStyle: PropTypes.object.isRequired,
+  arrowAreaStyle: PropTypes.object.isRequired,
   displayArrows: PropTypes.bool.isRequired,
   arrowOnHover: PropTypes.bool.isRequired,
   arrowImg: PropTypes.string.isRequired,
   primaryColor: PropTypes.string.isRequired,
 };
 
-export default Arrow;
+export default React.memo(Arrow);
