@@ -1,28 +1,23 @@
 import styled from 'styled-components';
 
-export const S_Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
 export const S_Gallery = styled.div`
   overflow: hidden;
   white-space: nowrap;
-  flex: 9;
+  height: 90%;
   width: 100%;
 `;
 
-export const S_Slider = styled.div`
+export const S_Slider = styled.div.attrs(
+  ({ width, index, translateDrag = 0, transition, translateDuration = 0.5 }) => ({
+    style: {
+      transform: `translateX(${-(index * 100) + (translateDrag / width) * 100}%)`,
+      transition: transition && `transform cubic-bezier(0,.59,.46,1) ${translateDuration}s`,
+    },
+  }),
+)`
   width: 100%;
   height: 100%;
   z-index: 1;
-  transform: translateX(
-    ${({ width, index, translateDrag = 0 }) => `${-(index * 100) + (translateDrag / width) * 100}%`}
-  );
-  transition: ${({ transition, translateDuration = 0.5 }) =>
-    transition ? `transform cubic-bezier(0,.59,.46,1) ${translateDuration * 0.7}s` : 'none'};
 `;
 
 export const S_Slide = styled.div`
