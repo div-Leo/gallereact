@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useMemo } from 'react';
 
 import GallereactConsumer from '../GallereactContext';
 import useSwipeAction from './useSwipeAction';
@@ -19,26 +19,37 @@ const Slider = () => {
     taglineStyle,
     titleStyle,
     captionStyle,
+    children,
   } = useContext(GallereactConsumer);
   const slider = useRef();
 
   const sliderWidth = slider.current && slider.current.getBoundingClientRect().width;
-  const { listeners, translateState } = useSwipeAction(index, sliderWidth, goToSlide);
+  const swipeAction = useSwipeAction(index, sliderWidth, goToSlide, swipe);
 
-  const renderSlides = images.map((curr, i) => (
-    <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image || curr}>
-      <Tagline {...{ curr, taglineStyle, titleStyle, captionStyle }} />
-    </S_Slide>
-  ));
+  const renderSlides = useMemo(
+    () =>
+      images.map((curr, i) =>
+        children ? (
+          <S_Slide key={i}>{children(curr, i)}</S_Slide>
+        ) : (
+          <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image || curr}>
+            <Tagline {...{ curr, taglineStyle, titleStyle, captionStyle }} />
+          </S_Slide>
+        ),
+      ),
+    [images, slideStyle, cover, taglineStyle, titleStyle, captionStyle],
+  );
+
+  const swipeOptions = swipe &&
+    swipeAction && { ...swipeAction.listeners, ...swipeAction.translateState };
 
   return (
     <S_Slider
-      {...listeners}
+      ref={slider}
       width={sliderWidth}
       transition={swipe || transition}
       index={index}
-      {...translateState}
-      ref={slider}
+      {...swipeOptions}
     >
       {renderSlides}
     </S_Slider>
