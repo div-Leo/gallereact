@@ -6,17 +6,21 @@ const initialTranslateState = {
   x0: null,
 };
 
-const useSwipeAction = (index, sliderWidth, goToSlide) => {
+const useSwipeAction = (index, sliderWidth, goToSlide, swipe) => {
   const [translateState, setTranslateState] = useState(initialTranslateState);
 
   useEffect(() => {
-    document.addEventListener('mouseup', reset, false);
-    document.addEventListener('touchend', reset, false);
+    if (swipe) {
+      document.addEventListener('mouseup', reset, false);
+      document.addEventListener('touchend', reset, false);
+    }
     return () => {
       document.removeEventListener('mouseup', reset);
       document.removeEventListener('touchend', reset);
     };
   }, []);
+
+  if (!swipe) return null;
 
   const reset = () => {
     setTranslateState(initialTranslateState);
