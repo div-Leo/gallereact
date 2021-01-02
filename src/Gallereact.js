@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { GallereactProvider } from './GallereactContext';
@@ -7,11 +7,10 @@ import Arrows from './Arrows';
 import Dots from './Dots';
 import Preview from './Preview';
 
-import { S_Container, S_Gallery } from './style.js';
+import { S_Gallery } from './style.js';
 
 const Gallereact = props => {
   const {
-    cover = true,
     loop = true,
     callback,
     containerStyle,
@@ -31,41 +30,33 @@ const Gallereact = props => {
   }, [index, autoPlay]);
 
   useEffect(() => {
-    goToSlide(inputIndex);
+    typeof inputIndex === 'number' && goToSlide(inputIndex);
   }, [inputIndex]);
 
-  const goToPreviousSlide = () => {
-    let i = index;
-    if (index > 0) i = index - 1;
-    else if (!swipe && loop) i = images.length - 1;
-    goToSlide(i);
-  };
-
-  const goToNextSlide = () => {
-    let i = index;
-    if (index < images.length - 1) i = index + 1;
-    else if (!swipe && loop) i = 0;
-    goToSlide(i);
-  };
-
-  const goToSlide = i => {
-    if (i >= 0 && i < images.length) {
-      setIndex(i);
+  const goToSlide = (i = 0) => {
+    setIndex(index => {
+      if (i === 'next') {
+        if (index < images.length - 1) i = index + 1;
+        else if (!swipe && loop) i = 0;
+      } else if (i === 'prev') {
+        if (index > 0) i = index - 1;
+        else if (!swipe && loop) i = images.length - 1;
+      }
+      if (i < 0 || i > images.length - 1) return index;
       callback && callback(i);
-    }
+      return i;
+    });
   };
 
   if (!images.length) return null;
 
   return (
-    <GallereactProvider value={{ ...props, index, goToPreviousSlide, goToNextSlide, goToSlide }}>
-      <S_Container>
-        <S_Gallery cover={cover} style={containerStyle}>
-          <Slider />
-          <Arrows />
-        </S_Gallery>
-        {displayPreview ? <Preview /> : <Dots />}
-      </S_Container>
+    <GallereactProvider value={{ ...props, index, goToSlide }}>
+      <S_Gallery style={containerStyle}>
+        <Slider />
+        <Arrows />
+      </S_Gallery>
+      {displayPreview ? <Preview /> : <Dots />}
     </GallereactProvider>
   );
 };
