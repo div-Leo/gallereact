@@ -32,7 +32,6 @@ const option2 = {
       height: '90%',
       margin: '5% 10%',
       boxShadow: '0 2px 20px -1px #2222',
-      position: 'relative',
     },
     taglineStyle: {
       background: '#FFF',
