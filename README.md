@@ -2,7 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg?style=flat)](http://makeapullrequest.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gallereact.svg) [![Issues](http://img.shields.io/github/issues/Leon31/gallereact.svg)](https://github.com/Leon31/gallereact/issues ) [![license](https://img.shields.io/github/license/leon31/gallereact.svg)](https://github.com/Leon31/gallereact/blob/master/LICENSE) [![Coverage Status](https://coveralls.io/repos/github/Leon31/gallereact/badge.svg?branch=master)](https://coveralls.io/github/Leon31/gallereact?branch=master)
 
-Gallereact is a complete ready to use gallery slider, with a lot of possible customizations. It works based on background images, which allows a better ratio management. Just styling the div that contains the component with a height and a width and the images will fit on that.
+Gallereact is a complete ready to use gallery slider, with a lot of possible customizations. It works based on object-fit for img tags, which allows a better ratio management. Just styling the div that contains the component with a height and a width and the images will fit on that.
 
 ## Getting started
 
@@ -57,7 +57,7 @@ function MyComponent () {
 | `secondaryColor`     |   String   | '#333'  |  false   | Color to apply on the default active dot - must be valid color ('black', '#000', rgb(0,0,0)). |
 | `containerStyle`     |   Object   |    -    |  false   |               Style to apply on the container.               |
 | `slideStyle`         |   Object   |    -    |  false   |             Style to apply on the single slide.              |
-| `dotConainerStyle`   |   Object   |    -    |  false   |         Style to apply on the container of the dots.         |
+| `dotContainerStyle`   |   Object   |    -    |  false   |         Style to apply on the container of the dots.         |
 | `dotStyle`           |   Object   |    -    |  false   |                 Style to apply on the dots.                  |
 | `dotActiveStyle`     |   Object   |    -    |  false   |              Style to apply on the active dot.               |
 | `arrowStyle`         |   Object   |    -    |  false   |                Style to apply on the arrows.                 |
