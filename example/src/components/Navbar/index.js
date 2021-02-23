@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className={`navbar ${close ? 'navbar--close' : ''}`}>
       <div className="navbar_title">GALLEREACT</div>
-      <div className="navbar_payoff">Background image slider</div>
+      <div className="navbar_payoff">Flexible images slider</div>
     </div>
   );
 };
