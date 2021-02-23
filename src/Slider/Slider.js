@@ -5,7 +5,7 @@ import useSwipeAction from './useSwipeAction';
 
 import Tagline from '../Tagline';
 
-import { S_Slide, S_Slider } from '../style.js';
+import { S_Slide, S_Slider, S_Slide_img } from '../style.js';
 
 const Slider = () => {
   const {
@@ -32,7 +32,8 @@ const Slider = () => {
         children ? (
           <S_Slide key={i}>{children(curr, i)}</S_Slide>
         ) : (
-          <S_Slide key={i} style={slideStyle} cover={cover} image={curr.image || curr}>
+          <S_Slide key={i} style={slideStyle}>
+            <S_Slide_img cover={cover} src={curr.image || curr} alt={`(slide ${i + 1})`} />
             <Tagline {...{ curr, taglineStyle, titleStyle, captionStyle }} />
           </S_Slide>
         ),

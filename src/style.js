@@ -25,10 +25,20 @@ export const S_Slide = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background-image: url(${({ image }) => image});
+  /* background-image: url(${({ image }) => image});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: ${({ cover }) => (cover ? 'cover' : 'contain')};
+  background-size: ${({ cover }) => (cover ? 'cover' : 'contain')}; */
+`;
+
+export const S_Slide_img = styled.img`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  object-position: center;
+  object-fit: ${({ cover }) => (cover ? 'cover' : 'contain')};
+  pointer-events: none;
 `;
 
 export const S_Tagline = styled.div`
