@@ -1,6 +1,6 @@
 # 🖼 Gallereact - React slider
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg?style=flat)](http://makeapullrequest.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gallereact.svg) [![Issues](http://img.shields.io/github/issues/Leon31/gallereact.svg)](https://github.com/Leon31/gallereact/issues ) [![license](https://img.shields.io/github/license/leon31/gallereact.svg)](https://github.com/Leon31/gallereact/blob/master/LICENSE) [![Coverage Status](https://coveralls.io/repos/github/Leon31/gallereact/badge.svg?branch=master)](https://coveralls.io/github/Leon31/gallereact?branch=master)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg?style=flat)](http://makeapullrequest.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gallereact.svg) [![Issues](http://img.shields.io/github/issues/div-Leo/gallereact.svg)](https://github.com/div-Leo/gallereact/issues ) [![license](https://img.shields.io/github/license/div-Leo/gallereact.svg)](https://github.com/div-Leo/gallereact/blob/master/LICENSE) [![Coverage Status](https://coveralls.io/repos/github/div-Leo/gallereact/badge.svg?branch=master)](https://coveralls.io/github/div-Leo/gallereact?branch=master)
 
 Gallereact is a complete ready to use gallery slider, with a lot of possible customizations. It works based on object-fit for img tags, which allows a better ratio management. Just styling the div that contains the component with a height and a width and the images will fit on that.
 
@@ -161,13 +161,13 @@ return (
 
 ## Contributing
 
-To contribute please read the [CONTRIBUTING.md](https://github.com/Leon31/gallereact/blob/master/CONTRIBUTING.md) 
+To contribute please read the [CONTRIBUTING.md](https://github.com/div-Leo/gallereact/blob/master/CONTRIBUTING.md) 
 
 ## Contributors
 
-* Leonardo Di Vittorio - [GitHub](https://github.com/Leon31) - [LinkedIn](https://www.linkedin.com/in/leonardo-di-vittorio/)
+* Leonardo Di Vittorio - [GitHub](https://github.com/div-Leo) - [LinkedIn](https://www.linkedin.com/in/leonardo-di-vittorio/)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Leon31/gallereact/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/div-Leo/gallereact/blob/master/LICENSE) file for details.
 

@@ -1,6 +1,6 @@
 {
   "name": "gallereact",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React customizable gallery slider.",
   "main": "./build/index.js",
   "scripts": {
@@ -18,10 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Leon31/gallereact.git"
+    "url": "https://github.com/div-Leo/gallereact.git"
   },
   "bugs": {
-    "url": "https://github.com/Leon31/gallereact/issues"
+    "url": "https://github.com/div-Leo/gallereact/issues"
   },
   "homepage": "https://gallereact.netlify.com/",
   "keywords": [
