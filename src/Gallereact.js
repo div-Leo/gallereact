@@ -48,6 +48,10 @@ const Gallereact = props => {
     });
   };
 
+  const goToNextSlide = useCallback(() => {
+    goToSlide('next');
+  }, [loop, swipe, images]);
+
   if (!images.length) return null;
 
   return (
