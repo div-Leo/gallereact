@@ -25,7 +25,7 @@ const Gallereact = props => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const play = autoPlay && setTimeout(goToNextSlide, duration);
+    const play = autoPlay && setTimeout(() => goToSlide('next'), duration);
     return () => clearTimeout(play);
   }, [index, autoPlay]);
 
@@ -47,10 +47,6 @@ const Gallereact = props => {
       return i;
     });
   };
-
-  const goToNextSlide = useCallback(() => {
-    goToSlide('next');
-  }, [loop, swipe, images]);
 
   if (!images.length) return null;
 
