@@ -25,7 +25,7 @@ const Gallereact = props => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const play = autoPlay && setTimeout(goToNextSlide, duration);
+    const play = autoPlay && setTimeout(() => goToSlide('next'), duration);
     return () => clearTimeout(play);
   }, [index, autoPlay]);
 
