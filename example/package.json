@@ -5,7 +5,7 @@
   "dependencies": {
     "antd": "^3.26.20",
     "gallereact": "^1.2.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.3",
     "prismjs": "^1.21.0",
     "react-icons": "^3.11.0",
     "react-scripts": "2.1.3",
